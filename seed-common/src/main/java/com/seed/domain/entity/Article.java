@@ -64,6 +64,7 @@ public class Article implements Serializable {
     /**
      * 是否允许评论 1是，0否
      */
+
     private String is_comment;
 
     /**
