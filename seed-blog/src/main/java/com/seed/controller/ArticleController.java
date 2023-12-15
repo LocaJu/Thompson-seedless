@@ -21,17 +21,19 @@ public class ArticleController {
     private ArticleService articleService;
 
     @GetMapping("hello")
-    public String hello(){
+    public String hello() {
         return "hello";
     }
 
 
     @GetMapping("/hotArticleList")
-    public ResponseResult getList(){
+    public ResponseResult getList() {
+        return articleService.getList();
+    }
 
-        ResponseResult result = articleService.getList();
-
-        return result;
+    @GetMapping("/articleList")
+    public ResponseResult articleList(Integer pageNum, Integer pageSize, Long categoryId) {
+        return articleService.articleList(pageNum, pageSize, categoryId);
     }
 
 }
