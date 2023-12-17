@@ -2,13 +2,14 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.seed.mapper.CategoryMapper">
+<mapper namespace="com.seed.mapper.LinkMapper">
 
-    <resultMap id="BaseResultMap" type="com.seed.domain.entity.Category">
+    <resultMap id="BaseResultMap" type="com.seed.domain.entity.Link">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
-            <result property="pid" column="pid" jdbcType="BIGINT"/>
+            <result property="logo" column="logo" jdbcType="VARCHAR"/>
             <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="address" column="address" jdbcType="VARCHAR"/>
             <result property="status" column="status" jdbcType="CHAR"/>
             <result property="createBy" column="create_by" jdbcType="BIGINT"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
@@ -18,9 +19,11 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,pid,
-        description,status,create_by,
-        create_time,update_by,update_time,
-        del_flag
+        id,name,logo,
+        description,address,status,
+        create_by,create_time,update_by,
+        update_time,del_flag
     </sql>
+
+
 </mapper>

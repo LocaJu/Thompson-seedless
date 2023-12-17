@@ -1,71 +1,74 @@
 package com.seed.domain.entity;
 
-
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.Date;
+import lombok.Data;
 
 /**
- * 分类表
- * @TableName tb_category
+ * 角色信息表
+ * @TableName sys_role
  */
-@TableName(value ="tb_category")
+@TableName(value ="sys_role")
 @Data
-public class Category implements Serializable {
+public class Role implements Serializable {
     /**
-     * 
+     * 角色ID
      */
     @TableId
     private Long id;
 
     /**
-     * 分类名
+     * 角色名称
      */
-    private String name;
+    private String roleName;
 
     /**
-     * 父分类id，如果没有父分类为-1
+     * 角色权限字符串
      */
-    private Long pid;
+    private String roleKey;
 
     /**
-     * 描述
+     * 显示顺序
      */
-    private String description;
+    private Integer roleSort;
 
     /**
-     * 状态0:正常,1禁用
+     * 角色状态（0正常 1停用）
      */
     private String status;
 
     /**
-     * 
+     * 删除标志（0代表存在 1代表删除）
+     */
+    private String delFlag;
+
+    /**
+     * 创建者
      */
     private Long createBy;
 
     /**
-     * 
+     * 创建时间
      */
     private Date createTime;
 
     /**
-     * 
+     * 更新者
      */
     private Long updateBy;
 
     /**
-     * 
+     * 更新时间
      */
     private Date updateTime;
 
     /**
-     * 删除标志（0代表未删除，1代表已删除）
+     * 备注
      */
-    private Integer delFlag;
+    private String remark;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

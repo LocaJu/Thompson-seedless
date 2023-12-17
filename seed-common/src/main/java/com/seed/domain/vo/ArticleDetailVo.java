@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,16 +14,15 @@ import java.util.Date;
  * @author 77286
  * @version 1.0
  * @description: TODO
- * @date 2023/12/15 20:45
+ * @date 2023/12/16 20:46
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class ArticleListVo implements Serializable {
+@AllArgsConstructor
+public class ArticleDetailVo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     /**
-     *id
+     *
      */
     @TableId
     private Long id;
@@ -38,20 +38,20 @@ public class ArticleListVo implements Serializable {
     private String content;
 
     /**
-     * 文章摘要
+     * 所属分类id
      */
-    private String summary;
+    private Long categoryId;
 
     /**
-     * @description: 分类名称
-     * @version 1.0
-     **/
+     * 所属分类名称
+     */
     private String categoryName;
 
     /**
      * 缩略图
      */
     private String thumbnail;
+
 
     /**
      * 访问量
@@ -64,7 +64,10 @@ public class ArticleListVo implements Serializable {
 
     private String isComment;
 
-
+    /**
+     *
+     */
+    private Long createBy;
 
     /**
      *
@@ -72,4 +75,5 @@ public class ArticleListVo implements Serializable {
     private Date createTime;
 
 
+    private static final long serialVersionUID = 1L;
 }

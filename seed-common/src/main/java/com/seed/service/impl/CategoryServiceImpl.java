@@ -11,6 +11,7 @@ import com.seed.mapper.CategoryMapper;
 import com.seed.service.ArticleService;
 import com.seed.service.CategoryService;
 import com.seed.utils.BeanCopyUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 * @createDate 2023-12-10 20:30:40
 */
 @Service
+@Slf4j
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
 implements CategoryService {
 
@@ -37,7 +39,7 @@ implements CategoryService {
         List<Article> articleList = articleService.list(articleLambdaQueryWrapper);
         //获取文章的分类id  并去重
         Set<Long> categoryIds = articleList.stream()
-                .map(Article::getCategory_id)
+                .map(Article::getCategoryId)
                 .collect(Collectors.toSet());
 
         //查询分类表

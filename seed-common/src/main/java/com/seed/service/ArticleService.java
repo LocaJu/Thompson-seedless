@@ -11,6 +11,9 @@ import com.seed.domain.entity.Article;
 */
 public interface ArticleService extends IService<Article> {
 
+     ResponseResult getArticleDetail(Long id);
+
+
     ResponseResult getList();
 
     ResponseResult articleList(Integer pageNum, Integer pageSize, Long categoryId);

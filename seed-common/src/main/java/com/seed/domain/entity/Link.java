@@ -1,21 +1,21 @@
 package com.seed.domain.entity;
 
 
+
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.Date;
+import lombok.Data;
 
 /**
- * 分类表
- * @TableName tb_category
+ * 友链
+ * @TableName tb_link
  */
-@TableName(value ="tb_category")
+@TableName(value ="tb_link")
 @Data
-public class Category implements Serializable {
+public class Link implements Serializable {
     /**
      * 
      */
@@ -23,22 +23,27 @@ public class Category implements Serializable {
     private Long id;
 
     /**
-     * 分类名
+     * 
      */
     private String name;
 
     /**
-     * 父分类id，如果没有父分类为-1
+     * 
      */
-    private Long pid;
+    private String logo;
 
     /**
-     * 描述
+     * 
      */
     private String description;
 
     /**
-     * 状态0:正常,1禁用
+     * 网站地址
+     */
+    private String address;
+
+    /**
+     * 审核状态 (0代表审核通过，1代表审核未通过，2代表未审核)
      */
     private String status;
 

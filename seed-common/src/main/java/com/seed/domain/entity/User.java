@@ -1,6 +1,5 @@
 package com.seed.domain.entity;
 
-
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -10,55 +9,80 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 分类表
- * @TableName tb_category
+ * 用户表
+ * @TableName sys_user
  */
-@TableName(value ="tb_category")
+@TableName(value ="sys_user")
 @Data
-public class Category implements Serializable {
+public class User implements Serializable {
     /**
-     * 
+     * 主键
      */
     @TableId
     private Long id;
 
     /**
-     * 分类名
+     * 用户名
      */
-    private String name;
+    private String userName;
 
     /**
-     * 父分类id，如果没有父分类为-1
+     * 昵称
      */
-    private Long pid;
+    private String nickName;
 
     /**
-     * 描述
+     * 密码
      */
-    private String description;
+    private String password;
 
     /**
-     * 状态0:正常,1禁用
+     * 用户类型：0代表普通用户，1代表管理员
+     */
+    private String type;
+
+    /**
+     * 账号状态（0正常 1停用）
      */
     private String status;
 
     /**
-     * 
+     * 邮箱
+     */
+    private String email;
+
+    /**
+     * 手机号
+     */
+    private String phonenumber;
+
+    /**
+     * 用户性别（0男，1女，2未知）
+     */
+    private String sex;
+
+    /**
+     * 头像
+     */
+    private String avatar;
+
+    /**
+     * 创建人的用户id
      */
     private Long createBy;
 
     /**
-     * 
+     * 创建时间
      */
     private Date createTime;
 
     /**
-     * 
+     * 更新人
      */
     private Long updateBy;
 
     /**
-     * 
+     * 更新时间
      */
     private Date updateTime;
 
