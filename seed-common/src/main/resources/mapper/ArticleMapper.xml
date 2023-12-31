@@ -9,17 +9,17 @@
             <result property="title" column="title" jdbcType="VARCHAR"/>
             <result property="content" column="content" jdbcType="VARCHAR"/>
             <result property="summary" column="summary" jdbcType="VARCHAR"/>
-            <result property="category_id" column="category_id" jdbcType="BIGINT"/>
+            <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
             <result property="thumbnail" column="thumbnail" jdbcType="VARCHAR"/>
-            <result property="is_top" column="is_top" jdbcType="CHAR"/>
+            <result property="isTop" column="is_top" jdbcType="CHAR"/>
             <result property="status" column="status" jdbcType="CHAR"/>
-            <result property="view_count" column="view_count" jdbcType="BIGINT"/>
-            <result property="is_comment" column="is_comment" jdbcType="CHAR"/>
-            <result property="create_by" column="create_by" jdbcType="BIGINT"/>
-            <result property="create_time" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="update_by" column="update_by" jdbcType="BIGINT"/>
-            <result property="update_time" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="del_flag" column="del_flag" jdbcType="INTEGER"/>
+            <result property="viewCount" column="view_count" jdbcType="BIGINT"/>
+            <result property="isComment" column="is_comment" jdbcType="CHAR"/>
+            <result property="createBy" column="create_by" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="BIGINT"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="delFlag" column="del_flag" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">

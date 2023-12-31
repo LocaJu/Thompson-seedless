@@ -2,6 +2,7 @@ package com.seed.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.seed.domain.entity.Article;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author 77286
@@ -9,6 +10,7 @@ import com.seed.domain.entity.Article;
 * @createDate 2023-12-10 16:18:36
 * @Entity seed.domain.Article
 */
+@Mapper
 public interface ArticleMapper extends BaseMapper<Article> {
 
 

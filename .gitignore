@@ -1,0 +1,15 @@
+# Ignore IDEA config files
+
+*.idea
+*.iml
+*.tmp
+.metadata
+.recommenders
+
+# Ignore binaries, temp files and test output, everywhere
+
+target
+test-output
+bin
+gen
+*.log

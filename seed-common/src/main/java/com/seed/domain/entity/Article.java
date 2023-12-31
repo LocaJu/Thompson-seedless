@@ -6,7 +6,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  * 文章表
@@ -14,6 +19,9 @@ import lombok.Data;
  */
 @TableName(value ="tb_article")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Accessors(chain = true)
 public class Article implements Serializable {
     /**
      * 
@@ -39,7 +47,13 @@ public class Article implements Serializable {
     /**
      * 所属分类id
      */
-    private Long category_id;
+    private Long categoryId;
+
+    /**
+     * 所属分类名称
+     */
+    @TableField(exist = false)
+    private String categoryName;
 
     /**
      * 缩略图
@@ -49,7 +63,7 @@ public class Article implements Serializable {
     /**
      * 是否置顶（0否，1是）
      */
-    private String is_top;
+    private String isTop;
 
     /**
      * 状态（0已发布，1草稿）
@@ -59,38 +73,38 @@ public class Article implements Serializable {
     /**
      * 访问量
      */
-    private Long view_count;
+    private Long viewCount;
 
     /**
      * 是否允许评论 1是，0否
      */
 
-    private String is_comment;
+    private String isComment;
 
     /**
      * 
      */
-    private Long create_by;
+    private Long createBy;
 
     /**
      * 
      */
-    private Date create_time;
+    private Date createTime;
 
     /**
      * 
      */
-    private Long update_by;
+    private Long updateBy;
 
     /**
      * 
      */
-    private Date update_time;
+    private Date updateTime;
 
     /**
      * 删除标志（0代表未删除，1代表已删除）
      */
-    private Integer del_flag;
+    private Integer delFlag;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

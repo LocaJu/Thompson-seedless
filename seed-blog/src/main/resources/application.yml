@@ -1,28 +1,14 @@
-server:
-  port: 7777
 spring:
+  profiles:
+    include: dao
   application:
     name: seed-blog
-
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/seed_blog?characterEncoding=utf-8
-    username: root
-    password: 772866144
   servlet:
     multipart:
-      max-file-size: 2MB
-      max-request-size: 5MB
+      max-request-size: 10MB
+      max-file-size: 5MB
+server:
+  port: 7777
 
-mybatis-plus:
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  global-config:
-    db-config:
-      logic-delete-field: delFlag
-      logic-delete-value: 1
-      logic-not-delete-value: 0
-      id-type: auto
-  configuration:
-    #是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名A_COLUMN(下滑线命名)到经典Java属性aColumn(驼峰命名)的类似映射
-    map-underscore-to-camel-case: false
+
+

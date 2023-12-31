@@ -56,20 +56,20 @@ public class ArticleListVo implements Serializable {
     /**
      * 访问量
      */
-    private Long view_count;
+    private Long viewCount;
 
     /**
      * 是否允许评论 1是，0否
      */
 
-    private String is_comment;
+    private String isComment;
 
 
 
     /**
      *
      */
-    private Date create_time;
+    private Date createTime;
 
 
 }
