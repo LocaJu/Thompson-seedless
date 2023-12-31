@@ -3,7 +3,7 @@ spring:
     name: seed-common
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/seed_blog?characterEncoding=utf-8&useSSL=false&useUnicode=true&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/seed_blog?characterEncoding=utf-8&useSSL=FALSE&useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
     password: 772866144
   servlet:
@@ -28,4 +28,11 @@ mybatis-plus:
       #是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名A_COLUMN(下滑线命名)到经典Java属性aColumn(驼峰命名)的类似映射
   #    map-underscore-to-camel-case: false
 
+#七牛云存储
+qiniu:
+  oss:
+    accessKey: 284OZEp3RFpzxWbQcVU8gLPjxDLmCKJJzZvci99C
+    secretKey: zNFLOlj5Rix1NqE_0WG97UUKP80-Saf4mPAJsr6E
+    bucket: seedless-blog
+  CDN: http://s66bj54ml.bkt.clouddn.com
 

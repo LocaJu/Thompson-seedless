@@ -3,5 +3,12 @@ spring:
     include: dao
   application:
     name: seed-blog
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 5MB
 server:
   port: 7777
+
+
+
