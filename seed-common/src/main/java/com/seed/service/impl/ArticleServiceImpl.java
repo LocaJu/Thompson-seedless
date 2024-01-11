@@ -3,7 +3,6 @@ package com.seed.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.seed.domain.ResponseResult;
 import com.seed.domain.entity.Article;
 import com.seed.domain.entity.Category;
@@ -15,8 +14,9 @@ import com.seed.mapper.ArticleMapper;
 import com.seed.service.ArticleService;
 import com.seed.service.CategoryService;
 import com.seed.utils.BeanCopyUtils;
+import com.seed.utils.RedisCache;
+import com.seed.utils.RedisConstants;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +37,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    RedisCache redisCache;
 
     @Override
     public ResponseResult getList() {
@@ -106,6 +109,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public ResponseResult getArticleDetail(Long id) {
         //根据id查询文章
         Article article = getById(id);
+        //从redis中获取浏览量
+        Integer viewCount = redisCache.getCacheMapValue(RedisConstants.ARTICLE_VIEW_COUNT, String.valueOf(id));
+        article.setViewCount(viewCount.longValue());
         //转换为VO
         ArticleDetailVo articleDetailVo = BeanCopyUtils.copyBean(article, ArticleDetailVo.class);
         //根据分类id查询分类名
@@ -116,5 +122,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         }
         //封装响应
         return ResponseResult.okResult(articleDetailVo);
+    }
+
+    //更新redis中的浏览量
+    @Override
+    public ResponseResult updateViewCount(Long id) {
+        Long viewCount = redisCache.incrementCacheMapValue(RedisConstants.ARTICLE_VIEW_COUNT, String.valueOf(id), null);
+        return ResponseResult.okResult(viewCount);
     }
 }

@@ -1,11 +1,12 @@
 package com.seed.service.impl;
 
+import com.seed.constants.SystemConstants;
 import com.seed.domain.LoginUser;
 import com.seed.domain.ResponseResult;
 import com.seed.domain.entity.User;
 import com.seed.domain.vo.BlogUserInfoVo;
 import com.seed.domain.vo.UserInfoVo;
-import com.seed.service.BlogLoginService;
+import com.seed.service.LoginService;
 import com.seed.utils.BeanCopyUtils;
 import com.seed.utils.JwtUtil;
 import com.seed.utils.RedisCache;
@@ -19,17 +20,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-import static com.seed.utils.RedisConstants.BLOG_LOGIN;
+import static com.seed.utils.RedisConstants.LOGIN;
 
 /**
  * @author 77286
  * @version 1.0
  * @description: TODO
- * @date 2023/12/17 16:05
+ * @date 2024/1/10 20:49
  */
 @Service
 @Slf4j
-public class BlogLoginServiceImpl implements BlogLoginService {
+public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -51,7 +52,7 @@ public class BlogLoginServiceImpl implements BlogLoginService {
         String userId = loginUser.getUser().getId().toString();
         String jwt = JwtUtil.createJWT(userId);
         //把用户信息存入redis
-        redisCache.setCacheObject(BLOG_LOGIN+userId,loginUser);
+        redisCache.setCacheObject(LOGIN +userId,loginUser);
         //把token和userInfo封装 返回
         //将User转换为UserInfoVo
         UserInfoVo userInfoVo = BeanCopyUtils.copyBean(loginUser.getUser(), UserInfoVo.class);
@@ -67,7 +68,7 @@ public class BlogLoginServiceImpl implements BlogLoginService {
         LoginUser loginUser = (LoginUser)authentication.getPrincipal();
         //获取userId
         Long userId = loginUser.getUser().getId();
-        redisCache.deleteObject(BLOG_LOGIN+userId);
+        redisCache.deleteObject(LOGIN+userId);
         return ResponseResult.okResult();
     }
 }

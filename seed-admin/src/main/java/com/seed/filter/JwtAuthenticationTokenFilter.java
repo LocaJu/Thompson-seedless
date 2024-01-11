@@ -8,7 +8,6 @@ import com.seed.utils.JwtUtil;
 import com.seed.utils.RedisCache;
 import com.seed.utils.WebUtils;
 import io.jsonwebtoken.Claims;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,10 +20,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.Objects;
 
-import static com.seed.utils.RedisConstants.BLOG_LOGIN;
+import static com.seed.utils.RedisConstants.LOGIN;
 
 /**
  * @author 77286
@@ -60,7 +58,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         String userId = claims.getSubject();
         //从redis中获取用户信息
-        LoginUser loginUser = redisCache.getCacheObject(BLOG_LOGIN + userId);
+        LoginUser loginUser = redisCache.getCacheObject(LOGIN + userId);
         //如果redis中获取不到
         if (Objects.isNull(loginUser)){
             //说明登录过期
