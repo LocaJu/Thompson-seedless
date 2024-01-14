@@ -15,17 +15,23 @@ import java.io.IOException;
  * @author 77286
  * @version 1.0
  * @description: TODO
- * @date 2023/12/30 17:40
+ * @date 2024/1/14 22:43
  */
 @RestController
+@RequestMapping
 public class UploadController {
 
     @Autowired
-    UploadService uploadService;
+    private UploadService uploadService;
 
+    @PostMapping("/upload")
+    public ResponseResult upload(@RequestParam("img") MultipartFile file)  {
+        try {
+            return uploadService.upload(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("文件上传上传失败");
+        }
 
-    @RequestMapping("/upload")
-    public ResponseResult upload(@RequestParam("img") MultipartFile file) throws IOException {
-        return uploadService.upload(file);
     }
 }

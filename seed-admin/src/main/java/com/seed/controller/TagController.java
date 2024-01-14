@@ -47,4 +47,9 @@ public class TagController {
     public ResponseResult updateTag(@RequestBody TagDTO tagDTO){
         return tagService.updateTag(tagDTO);
     }
+
+    @GetMapping("/listAllTag")
+    public ResponseResult listAllTag(){
+        return tagService.listAllTag();
+    }
 }

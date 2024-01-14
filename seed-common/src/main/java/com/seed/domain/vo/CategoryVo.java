@@ -20,4 +20,7 @@ public class CategoryVo implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String name;
-}
+    /**
+     * 描述
+     */
+    private String description;}

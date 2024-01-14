@@ -65,9 +65,19 @@ implements TagService{
         return ResponseResult.okResult(tagVo);
     }
 
+    /**
+     *  修改标签
+     **/
     @Override
     public ResponseResult updateTag(TagDTO tagDTO) {
         baseMapper.updateById(BeanCopyUtils.copyBean(tagDTO, Tag.class));
         return ResponseResult.okResult();
+    }
+
+    @Override
+    public ResponseResult listAllTag() {
+        List<Tag> tags = baseMapper.selectList(null);
+        List<TagVo> tagVoList = BeanCopyUtils.copyBeanList(tags, TagVo.class);
+        return ResponseResult.okResult(tagVoList);
     }
 }
