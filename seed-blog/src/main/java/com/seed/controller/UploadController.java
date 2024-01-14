@@ -26,7 +26,6 @@ public class UploadController {
 
     @RequestMapping("/upload")
     public ResponseResult upload(@RequestParam("img") MultipartFile file) throws IOException {
-
         return uploadService.upload(file);
     }
 }

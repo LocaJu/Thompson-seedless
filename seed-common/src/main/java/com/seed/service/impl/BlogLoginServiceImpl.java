@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+import static com.seed.utils.RedisConstants.BLOG_LOGIN;
+
 /**
  * @author 77286
  * @version 1.0
@@ -49,7 +51,7 @@ public class BlogLoginServiceImpl implements BlogLoginService {
         String userId = loginUser.getUser().getId().toString();
         String jwt = JwtUtil.createJWT(userId);
         //把用户信息存入redis
-        redisCache.setCacheObject("bloglogin:"+userId,loginUser);
+        redisCache.setCacheObject(BLOG_LOGIN+userId,loginUser);
         //把token和userInfo封装 返回
         //将User转换为UserInfoVo
         UserInfoVo userInfoVo = BeanCopyUtils.copyBean(loginUser.getUser(), UserInfoVo.class);
@@ -65,7 +67,7 @@ public class BlogLoginServiceImpl implements BlogLoginService {
         LoginUser loginUser = (LoginUser)authentication.getPrincipal();
         //获取userId
         Long userId = loginUser.getUser().getId();
-        redisCache.deleteObject("bloglogin:"+userId);
+        redisCache.deleteObject(BLOG_LOGIN+userId);
         return ResponseResult.okResult();
     }
 }

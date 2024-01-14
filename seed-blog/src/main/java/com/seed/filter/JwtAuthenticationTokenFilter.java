@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Objects;
 
+import static com.seed.utils.RedisConstants.BLOG_LOGIN;
+
 /**
  * @author 77286
  * @version 1.0
@@ -58,7 +60,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         String userId = claims.getSubject();
         //从redis中获取用户信息
-        LoginUser loginUser = redisCache.getCacheObject("bloglogin:" + userId);
+        LoginUser loginUser = redisCache.getCacheObject(BLOG_LOGIN + userId);
         //如果redis中获取不到
         if (Objects.isNull(loginUser)){
             //说明登录过期

@@ -2,7 +2,10 @@ package com.seed.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.seed.domain.ResponseResult;
+import com.seed.domain.dto.AddArticleDto;
 import com.seed.domain.entity.Article;
+
+import java.util.List;
 
 /**
 * @author 77286
@@ -17,4 +20,10 @@ public interface ArticleService extends IService<Article> {
     ResponseResult getList();
 
     ResponseResult articleList(Integer pageNum, Integer pageSize, Long categoryId);
+
+    ResponseResult updateViewCount(Long id);
+
+    ResponseResult add(AddArticleDto article);
+
+    ResponseResult getAllList();
 }

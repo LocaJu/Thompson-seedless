@@ -235,4 +235,28 @@ public class RedisCache
     {
         return redisTemplate.keys(pattern);
     }
+
+    /*
+     * @description: 根据map中的hashKey 递增value
+     * @author: 77286
+     * @date: 2024/1/1 13:56
+     * @param:  String key
+                String hashKey
+                int value
+     * @return: java.lang.Long
+     * @version 1.0
+     **/
+    public Long incrementCacheMapValue(final String key,final String hashKey,Integer value){
+        if (null==value){
+            return incrementCacheMapValue(key,hashKey);
+        }
+        return redisTemplate.opsForHash().increment(key, hashKey, value);
+    }
+    //根据map中的hashKey 递增 1
+    private Long incrementCacheMapValue(final String key,final String hashKey){
+
+        return redisTemplate.opsForHash().increment(key, hashKey, 1);
+    }
+
+
 }
