@@ -1,7 +1,9 @@
 package com.seed.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.seed.domain.entity.Role;
-import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
 * @author 77286
@@ -10,8 +12,8 @@ import org.apache.ibatis.annotations.Mapper;
 * @Entity com.seed.domain.entity.Role
 */
 
-public interface RoleMapper {
+public interface RoleMapper extends BaseMapper<Role> {
 
 
-
+    List<String> selectRoleKeyByUserId(Long id);
 }

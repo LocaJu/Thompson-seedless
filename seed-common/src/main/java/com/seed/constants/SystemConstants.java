@@ -37,4 +37,6 @@ public class SystemConstants {
      */
     public static final String LINK_COMMENT = "1";
 
+    public static final String MENU = "C";
+    public static final String BUTTON = "F";
 }

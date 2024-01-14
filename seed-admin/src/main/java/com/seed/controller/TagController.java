@@ -1,11 +1,12 @@
 package com.seed.controller;
 
 import com.seed.domain.ResponseResult;
+import com.seed.domain.dto.TagDTO;
+import com.seed.domain.vo.PageVo;
+import com.seed.domain.vo.TagVo;
 import com.seed.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author 77286
@@ -21,8 +22,29 @@ public class TagController {
     TagService tagService;
 
     @GetMapping("/list")
-    public ResponseResult list(){
-        return ResponseResult.okResult(tagService.list());
+    public ResponseResult<PageVo> list(Integer pageNum, Integer pageSize, TagDTO tagDTO){
+
+        return tagService.pageTagList(pageNum, pageSize, tagDTO);
     }
 
+    @PostMapping
+    public ResponseResult addTag(@RequestBody TagDTO tagDTO){
+
+        return tagService.addTag(tagDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseResult deleteTagById(@PathVariable("id") Long id){
+        return tagService.deleteTagById(id);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseResult getTagById(@PathVariable("id") Long id){
+        return tagService.getTagById(id);
+    }
+
+    @PutMapping
+    public ResponseResult updateTag(@RequestBody TagDTO tagDTO){
+        return tagService.updateTag(tagDTO);
+    }
 }

@@ -24,4 +24,16 @@
         create_by,create_time,update_by,
         update_time,remark
     </sql>
+    <select id="selectRoleKeyByUserId" resultType="java.lang.String">
+        select
+           distinct role.role_key
+        from
+            sys_user_role user_role
+        left join
+            sys_role role on user_role.role_id = role.id
+        where
+            user_role.user_id =#{id}
+          and role.del_flag = '0'
+          and role.status = '0'
+    </select>
 </mapper>
