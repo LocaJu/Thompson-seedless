@@ -21,6 +21,7 @@ import com.seed.utils.RedisCache;
 import com.seed.utils.RedisConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +39,9 @@ import static com.seed.constants.SystemConstants.ARTICLE_STATUS_NORMAL;
 @Service
 @Slf4j
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService{
+
+    @Value("${qiniu.CDN}")
+    String CDN;
 
     @Autowired
     private CategoryService categoryService;
@@ -147,9 +151,18 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         public ResponseResult add(AddArticleDto articleDto) {
             //添加 博客
             Article article = BeanCopyUtils.copyBean(articleDto, Article.class);
-            //TODO 保存图片的相对路径----->查询时加上域名
-            save(article);
+            /**
+            * 保存图片的相对路径----->查询时加上域名
+            *                 http://s66bj54ml.bkt.clouddn.com/2023/12/30/2/2eacc66309ade14644a6b9b4f9bbf0ee/2eacc66309ade14644a6b9b4f9bbf0ee.csv
+            *得到文件路径 如：                                   /2023/12/30/2/2eacc66309ade14644a6b9b4f9bbf0ee/2eacc66309ade14644a6b9b4f9bbf0ee.csv
+            */
+            //将文章中的路径域名去掉（数据库中存储文件相对路径）
+            String thumbnailUrl = article.getThumbnail();
+            String filepath = thumbnailUrl.replace(CDN, "");
+            article.setThumbnail(filepath);
 
+            //保存文章
+            save(article);
             List<ArticleTag> articleTags = articleDto.getTags().stream()
                     .map(tagId -> new ArticleTag(article.getId(), tagId))
                     .collect(Collectors.toList());
@@ -162,7 +175,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public ResponseResult getAllList() {
         List<Article> articles = baseMapper.selectList(null);
         //TODO 后台查询文章
-
-        return null;
+        //将文章中的路径加上域名（数据库中存储文件相对路径）
+        /**
+         *                                 /2023/12/30/2/2eacc66309ade14644a6b9b4f9bbf0ee/2eacc66309ade14644a6b9b4f9bbf0ee.csv
+         * http://s66bj54ml.bkt.clouddn.com/2023/12/30/2/2eacc66309ade14644a6b9b4f9bbf0ee/2eacc66309ade14644a6b9b4f9bbf0ee.csv
+         **/
+        List<Article> articleList = articles.stream().map(s -> s.setThumbnail(CDN + s.getThumbnail())).collect(Collectors.toList());
+        //转换为VO
+        List<ArticleListVo> articleListVos = BeanCopyUtils.copyBeanList(articleList, ArticleListVo.class);
+        return ResponseResult.okResult(articleListVos);
     }
 }
