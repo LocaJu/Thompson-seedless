@@ -1,6 +1,7 @@
 package com.seed.scheduleJob;
 
 import com.seed.domain.entity.Article;
+import com.seed.mapper.ArticleMapper;
 import com.seed.service.ArticleService;
 import com.seed.utils.RedisCache;
 import com.seed.utils.RedisConstants;
