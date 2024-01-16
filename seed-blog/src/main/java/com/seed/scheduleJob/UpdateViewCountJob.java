@@ -1,13 +1,18 @@
 package com.seed.scheduleJob;
 
 import com.seed.domain.entity.Article;
+import com.seed.mapper.ArticleMapper;
 import com.seed.service.ArticleService;
 import com.seed.utils.RedisCache;
 import com.seed.utils.RedisConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,7 +30,7 @@ public class UpdateViewCountJob {
     RedisCache redisCache;
 
     @Autowired
-    ArticleService articleService;
+    JdbcTemplate jdbcTemplate;
 
     @Scheduled(cron = "* 0/50 * * * ?")
     public void updateViewCount() {
@@ -36,6 +41,17 @@ public class UpdateViewCountJob {
                         new Article(Long.valueOf(entry.getKey()), entry.getValue().longValue()))
                 .collect(Collectors.toList());
         //更新到数据库
-        articleService.updateBatchById(articleList);
+        String sql = "update tb_article set view_count = ?,update_time = now() where id = ?";
+        jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
+                preparedStatement.setString(1,articleList.get(i).getViewCount().toString());
+                preparedStatement.setLong(2,articleList.get(i).getId());
+            }
+            @Override
+            public int getBatchSize() {
+                return articleList.size();
+            }
+        });
     }
 }

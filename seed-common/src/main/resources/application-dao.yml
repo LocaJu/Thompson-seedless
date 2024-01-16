@@ -3,18 +3,18 @@ spring:
     name: seed-common
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/seed_blog?characterEncoding=utf-8&useSSL=FALSE&useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://114.55.31.80:3306/seedless?characterEncoding=utf-8&useSSL=FALSE&useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
-    password: 772866144
+    password: root
   servlet:
     multipart:
       max-file-size: 2MB
       max-request-size: 5MB
   redis:
     database: 1
-    host: 127.0.0.1
+    host: 114.55.31.80
     port: 6379
-    password: 123321
+    password: qq772866144
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
