@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seed.domain.ResponseResult;
-import com.seed.domain.dto.AddArticleDto;
+import com.seed.domain.dto.ArticleDto;
 import com.seed.domain.entity.Article;
 import com.seed.domain.entity.ArticleTag;
 import com.seed.domain.entity.Category;
@@ -30,6 +30,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.seed.constants.SystemConstants.ARTICLE_STATUS_NORMAL;
+import static net.sf.jsqlparser.parser.feature.Feature.update;
 
 /**
 * @author 77286
@@ -148,7 +149,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
         @Override
         @Transactional
-        public ResponseResult add(AddArticleDto articleDto) {
+        public ResponseResult add(ArticleDto articleDto) {
             //添加 博客
             Article article = BeanCopyUtils.copyBean(articleDto, Article.class);
             /**
@@ -172,8 +173,17 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         }
 
     @Override
-    public ResponseResult getAllList() {
-        List<Article> articles = baseMapper.selectList(null);
+    public ResponseResult getAllList(Integer pageNum, Integer pageSize, ArticleDto article) {
+        //分页查询
+        LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
+        //条件查询
+        queryWrapper.like(Objects.nonNull(article.getSummary()), Article::getSummary, "%"+article.getSummary()+"%")
+                .like(Objects.nonNull(article.getTitle()), Article::getTitle, "%"+article.getTitle()+"%");
+
+        Page<Article> page=new Page<>(pageNum==null?1:pageNum,pageSize==null?10:pageSize);
+        page(page, queryWrapper);
+        List<Article> articles = page.getRecords();
+
         //TODO 后台查询文章
         //将文章中的路径加上域名（数据库中存储文件相对路径）
         /**
@@ -183,6 +193,20 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<Article> articleList = articles.stream().map(s -> s.setThumbnail(CDN + s.getThumbnail())).collect(Collectors.toList());
         //转换为VO
         List<ArticleListVo> articleListVos = BeanCopyUtils.copyBeanList(articleList, ArticleListVo.class);
-        return ResponseResult.okResult(articleListVos);
+        //封装查询结果
+        PageVo pageVo = new PageVo(articleListVos, page.getTotal());
+        return ResponseResult.okResult(pageVo);
+    }
+
+    /**
+     * 修改文章
+     * @param articleDto
+     * @return
+     */
+    @Override
+    public ResponseResult updateArticle(ArticleDto articleDto) {
+        Article article = BeanCopyUtils.copyBean(articleDto, Article.class);
+        baseMapper.updateById(article);
+        return ResponseResult.okResult();
     }
 }

@@ -1,6 +1,6 @@
 # Ignore IDEA config files
 
-*.idea
+*.idea/
 *.iml
 *.tmp
 .metadata
