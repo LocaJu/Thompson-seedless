@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddArticleDto {
+public class ArticleDto {
     private Long id;
     //标题
     private String title;
