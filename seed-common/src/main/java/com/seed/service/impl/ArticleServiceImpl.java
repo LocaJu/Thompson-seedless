@@ -209,4 +209,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         baseMapper.updateById(article);
         return ResponseResult.okResult();
     }
+
+
+    @Override
+    public ResponseResult deleteArticle(Long id) {
+        baseMapper.deleteById(id);
+        return ResponseResult.okResult();
+    }
 }
