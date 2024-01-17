@@ -26,6 +26,7 @@ public enum AppHttpCodeEnum {
 
     NICKNAME_EXIST(511,"昵称已存在"),
 
+    DICT_TYPE_EXIST(512,"字典类型已存在"),
     FILE_TYPE_ERROR(507,"文件类型错误");
 
 

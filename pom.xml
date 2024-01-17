@@ -12,6 +12,8 @@
         <module>seed-common</module>
         <module>seed-admin</module>
         <module>seed-blog</module>
+        <module>ruoyi-system</module>
+        <module>ruoyi-common</module>
     </modules>
 
     <properties>
