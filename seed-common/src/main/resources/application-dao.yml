@@ -5,7 +5,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://114.55.31.80:3306/dip_blog?characterEncoding=utf-8&useSSL=FALSE&useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: dip_blog
-    password: dip_blog
+    password: p@ssWor$
   servlet:
     multipart:
       max-file-size: 2MB
