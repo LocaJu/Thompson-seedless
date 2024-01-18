@@ -23,4 +23,11 @@ public class CategoryVo implements Serializable {
     /**
      * 描述
      */
-    private String description;}
+    private String description;
+
+    /**
+     * 状态
+     */
+    private String status;
+
+}
