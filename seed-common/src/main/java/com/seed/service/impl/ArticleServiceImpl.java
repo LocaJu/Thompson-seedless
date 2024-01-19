@@ -207,6 +207,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public ResponseResult updateArticle(ArticleDto articleDto) {
         Article article = BeanCopyUtils.copyBean(articleDto, Article.class);
         baseMapper.updateById(article);
+
         return ResponseResult.okResult();
     }
 

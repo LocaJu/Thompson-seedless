@@ -1,4 +1,4 @@
-package com.seed.domain.entity;
+package com.seed.domain.entity.system;
 
 
 import java.io.Serializable;
@@ -7,55 +7,35 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.seed.ruoyi.core.domain.BaseEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * 字典数据表
- * @TableName sys_dict_data
+ * 字典类型表
+ * @TableName sys_dict_type
  */
-@TableName(value ="sys_dict_data")
+@TableName(value ="sys_dict_type")
 @Data
-public class SysDictData implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+public class SysDictType extends BaseEntity implements Serializable {
     /**
-     * 字典编码
+     * 字典主键
      */
     @TableId
-    private Long dictCode;
+    private Long dictId;
 
     /**
-     * 字典排序
+     * 字典名称
      */
-    private Integer dictSort;
-
-    /**
-     * 字典标签
-     */
-    private String dictLabel;
-
-    /**
-     * 字典键值
-     */
-    private String dictValue;
+    private String dictName;
 
     /**
      * 字典类型
      */
     private String dictType;
-
-    /**
-     * 样式属性（其他样式扩展）
-     */
-    private String cssClass;
-
-    /**
-     * 表格回显样式
-     */
-    private String listClass;
-
-    /**
-     * 是否默认（Y是 N否）
-     */
-    private String isDefault;
 
     /**
      * 状态（0正常 1停用）

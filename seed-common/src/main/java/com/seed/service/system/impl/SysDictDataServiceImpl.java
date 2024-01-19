@@ -4,7 +4,7 @@ package com.seed.service.system.impl;
 
 
 
-import com.seed.domain.entity.SysDictData;
+import com.seed.domain.entity.system.SysDictData;
 import com.seed.mapper.system.SysDictDataMapper;
 import com.seed.ruoyi.utils.DictUtils;
 import com.seed.service.system.ISysDictDataService;

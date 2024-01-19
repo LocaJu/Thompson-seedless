@@ -1,7 +1,7 @@
 package com.seed.mapper.system;
 
 
-import com.seed.domain.entity.SysDictData;
+import com.seed.domain.entity.system.SysDictData;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

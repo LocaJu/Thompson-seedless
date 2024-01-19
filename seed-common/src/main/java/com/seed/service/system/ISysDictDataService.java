@@ -2,7 +2,7 @@ package com.seed.service.system;
 
 
 
-import com.seed.domain.entity.SysDictData;
+import com.seed.domain.entity.system.SysDictData;
 
 import java.util.List;
 

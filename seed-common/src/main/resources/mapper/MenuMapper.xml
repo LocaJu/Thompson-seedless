@@ -45,7 +45,7 @@
             sys_menu menu on menu.id = role_menu.menu_id
         where
             user_role.user_id =#{id}
-          and m.enu_type in ('F','C')
+          and menu.menu_type in ('F','C')
           and menu.status = '0'
           and menu.del_flag = '0'
     </select>

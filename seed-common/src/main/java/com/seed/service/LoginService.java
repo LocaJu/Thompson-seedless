@@ -2,9 +2,10 @@ package com.seed.service;
 
 import com.seed.domain.ResponseResult;
 import com.seed.domain.entity.User;
+import com.seed.ruoyi.core.domain.AjaxResult;
 
 public interface LoginService {
-    ResponseResult login(User user);
+    AjaxResult login(String username, String password, String code, String uuid);
 
     public ResponseResult logout();
 }

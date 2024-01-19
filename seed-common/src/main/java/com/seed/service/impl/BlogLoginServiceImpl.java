@@ -1,8 +1,9 @@
 package com.seed.service.impl;
 
-import com.seed.domain.LoginUser;
+
 import com.seed.domain.ResponseResult;
 import com.seed.domain.entity.User;
+import com.seed.domain.model.LoginUser;
 import com.seed.domain.vo.BlogUserInfoVo;
 import com.seed.domain.vo.UserInfoVo;
 import com.seed.service.BlogLoginService;
@@ -49,7 +50,7 @@ public class BlogLoginServiceImpl implements BlogLoginService {
         }
         //获取userId生成token
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
-        String userId = loginUser.getUser().getId().toString();
+        String userId = loginUser.getUser().getUserId().toString();
         String jwt = JwtUtil.createJWT(userId);
         //把用户信息存入redis
         redisCache.setCacheObject(BLOG_LOGIN+userId,loginUser);
@@ -67,7 +68,7 @@ public class BlogLoginServiceImpl implements BlogLoginService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         LoginUser loginUser = (LoginUser)authentication.getPrincipal();
         //获取userId
-        Long userId = loginUser.getUser().getId();
+        Long userId = loginUser.getUser().getUserId();
         redisCache.deleteObject(BLOG_LOGIN+userId);
         return ResponseResult.okResult();
     }

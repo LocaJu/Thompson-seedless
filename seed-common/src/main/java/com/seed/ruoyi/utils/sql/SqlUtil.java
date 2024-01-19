@@ -2,7 +2,8 @@ package com.seed.ruoyi.utils.sql;
 
 
 import com.seed.ruoyi.utils.StringUtils;
-import com.sun.xml.internal.ws.util.UtilException;
+import com.sun.xml.ws.util.UtilException;
+
 
 /**
  * sql操作工具类

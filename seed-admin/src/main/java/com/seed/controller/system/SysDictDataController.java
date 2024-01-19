@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
-import com.seed.domain.entity.SysDictData;
+import com.seed.domain.entity.system.SysDictData;
 import com.seed.ruoyi.annotation.Log;
 import com.seed.ruoyi.core.controller.BaseController;
 import com.seed.ruoyi.core.domain.AjaxResult;

@@ -3,7 +3,8 @@ package com.seed.ruoyi.core.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import com.seed.domain.LoginUser;
+
+import com.seed.domain.model.LoginUser;
 import com.seed.ruoyi.constant.HttpStatus;
 import com.seed.ruoyi.core.domain.AjaxResult;
 import com.seed.ruoyi.core.page.PageDomain;
@@ -184,7 +185,7 @@ public class BaseController
      */
     public Long getUserId()
     {
-        return getLoginUser().getUser().getId();
+        return getLoginUser().getUser().getUserId();
     }
 
     /**

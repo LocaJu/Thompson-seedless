@@ -2,7 +2,7 @@ package com.seed.mapper.system;
 
 
 
-import com.seed.domain.entity.SysDictType;
+import com.seed.domain.entity.system.SysDictType;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

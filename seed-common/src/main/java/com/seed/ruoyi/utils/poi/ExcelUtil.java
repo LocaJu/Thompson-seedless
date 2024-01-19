@@ -15,7 +15,8 @@ import com.seed.ruoyi.utils.file.FileTypeUtils;
 import com.seed.ruoyi.utils.file.FileUtils;
 import com.seed.ruoyi.utils.file.ImageUtils;
 import com.seed.ruoyi.utils.reflect.ReflectUtils;
-import com.sun.xml.internal.ws.util.UtilException;
+
+import com.sun.xml.ws.util.UtilException;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;

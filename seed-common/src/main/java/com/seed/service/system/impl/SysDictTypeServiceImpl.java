@@ -4,8 +4,8 @@ package com.seed.service.system.impl;
 import com.aliyun.oss.ServiceException;
 
 
-import com.seed.domain.entity.SysDictData;
-import com.seed.domain.entity.SysDictType;
+import com.seed.domain.entity.system.SysDictData;
+import com.seed.domain.entity.system.SysDictType;
 import com.seed.mapper.system.SysDictDataMapper;
 import com.seed.mapper.system.SysDictTypeMapper;
 import com.seed.ruoyi.constant.UserConstants;

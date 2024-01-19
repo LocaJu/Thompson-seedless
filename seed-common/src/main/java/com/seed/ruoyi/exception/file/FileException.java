@@ -1,7 +1,7 @@
 package com.seed.ruoyi.exception.file;
 
 
-import com.seed.ruoyi.exception.file.base.BaseException;
+import com.seed.ruoyi.exception.base.BaseException;
 
 /**
  * 文件信息异常类

@@ -1,4 +1,4 @@
-package com.seed.ruoyi.exception.file.base;
+package com.seed.ruoyi.exception.base;
 
 
 import com.seed.ruoyi.utils.MessageUtils;

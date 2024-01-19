@@ -1,8 +1,8 @@
 package com.seed.service.system;
 
 
-import com.seed.domain.entity.SysDictData;
-import com.seed.domain.entity.SysDictType;
+import com.seed.domain.entity.system.SysDictData;
+import com.seed.domain.entity.system.SysDictType;
 
 import java.util.List;
 

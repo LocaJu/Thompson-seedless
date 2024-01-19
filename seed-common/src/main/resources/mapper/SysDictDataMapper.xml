@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.seed.mapper.SysDictDataMapper">
 
-    <resultMap id="BaseResultMap" type="com.seed.domain.entity.SysDictData">
+    <resultMap id="BaseResultMap" type="com.seed.domain.entity.system.SysDictData">
             <id property="dictCode" column="dict_code" jdbcType="BIGINT"/>
             <result property="dictSort" column="dict_sort" jdbcType="INTEGER"/>
             <result property="dictLabel" column="dict_label" jdbcType="VARCHAR"/>
@@ -40,7 +40,7 @@
         delete from sys_dict_data
         where  dict_code = #{dictCode,jdbcType=BIGINT} 
     </delete>
-    <insert id="insert" keyColumn="dict_code" keyProperty="dictCode" parameterType="com.seed.domain.entity.SysDictData" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="dict_code" keyProperty="dictCode" parameterType="com.seed.domain.entity.system.SysDictData" useGeneratedKeys="true">
         insert into sys_dict_data
         ( dict_code,dict_sort,dict_label
         ,dict_value,dict_type,css_class
@@ -53,7 +53,7 @@
         ,#{createBy,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR}
         ,#{updateTime,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" keyColumn="dict_code" keyProperty="dictCode" parameterType="com.seed.domain.entity.SysDictData" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="dict_code" keyProperty="dictCode" parameterType="com.seed.domain.entity.system.SysDictData" useGeneratedKeys="true">
         insert into sys_dict_data
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="dictCode != null">dict_code,</if>
@@ -88,7 +88,7 @@
                 <if test="remark != null">#{remark,jdbcType=VARCHAR},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.seed.domain.entity.SysDictData">
+    <update id="updateByPrimaryKeySelective" parameterType="com.seed.domain.entity.system.SysDictData">
         update sys_dict_data
         <set>
                 <if test="dictSort != null">
@@ -133,7 +133,7 @@
         </set>
         where   dict_code = #{dictCode,jdbcType=BIGINT} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.seed.domain.entity.SysDictData">
+    <update id="updateByPrimaryKey" parameterType="com.seed.domain.entity.system.SysDictData">
         update sys_dict_data
         set 
             dict_sort =  #{dictSort,jdbcType=INTEGER},

@@ -36,3 +36,16 @@ qiniu:
     bucket: seedless-blog
   CDN: http://s66bj54ml.bkt.clouddn.com
 
+ruoyi:
+  captchaType: math
+
+# token配置
+token:
+  header: token
+  secret: hello
+  expireTime: 3600
+# 用户登录配置
+user:
+  password:
+    maxRetryCount: 5
+    lockTime: 60

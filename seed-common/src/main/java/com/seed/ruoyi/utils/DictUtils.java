@@ -3,7 +3,7 @@ package com.seed.ruoyi.utils;
 
 
 import com.alibaba.fastjson2.JSONArray;
-import com.seed.domain.entity.SysDictData;
+import com.seed.domain.entity.system.SysDictData;
 import com.seed.ruoyi.constant.CacheConstants;
 
 import com.seed.ruoyi.utils.spring.SpringUtils;

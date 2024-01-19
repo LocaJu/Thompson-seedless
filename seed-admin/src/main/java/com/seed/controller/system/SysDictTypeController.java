@@ -3,7 +3,7 @@ package com.seed.controller.system;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
-import com.seed.domain.entity.SysDictType;
+import com.seed.domain.entity.system.SysDictType;
 import com.seed.ruoyi.annotation.Log;
 import com.seed.ruoyi.core.controller.BaseController;
 import com.seed.ruoyi.core.domain.AjaxResult;
