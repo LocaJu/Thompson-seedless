@@ -1,6 +1,6 @@
 package com.seed.domain.model;
 
-import com.alibaba.fastjson2.annotation.JSONField;
+import com.alibaba.fastjson.annotation.JSONField;
 
 import com.seed.domain.entity.system.SysUser;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,5 +1,6 @@
 package com.seed.handler.config;
 
+
 import com.alibaba.fastjson.JSON;
 import com.seed.domain.ResponseResult;
 import com.seed.enums.AppHttpCodeEnum;
