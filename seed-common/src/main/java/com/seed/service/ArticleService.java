@@ -29,4 +29,6 @@ public interface ArticleService extends IService<Article> {
     ResponseResult getAllList(Integer pageNum, Integer pageSize, ArticleDto article);
 
     ResponseResult updateArticle(ArticleDto article);
+
+    ResponseResult deleteArticle(Long id);
 }

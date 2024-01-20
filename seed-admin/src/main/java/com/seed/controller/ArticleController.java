@@ -43,4 +43,9 @@ public class ArticleController {
     public ResponseResult updateArticle(@RequestBody ArticleDto article){
         return articleService.updateArticle(article);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseResult deleteArticle(@PathVariable("id") Long id){
+        return articleService.deleteArticle(id);
+    }
 }

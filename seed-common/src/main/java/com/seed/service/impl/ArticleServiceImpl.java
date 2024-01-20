@@ -30,7 +30,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.seed.constants.SystemConstants.ARTICLE_STATUS_NORMAL;
-import static net.sf.jsqlparser.parser.feature.Feature.update;
+
 
 /**
 * @author 77286
@@ -48,7 +48,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     private CategoryService categoryService;
 
     @Autowired
-    RedisCache redisCache;
+    private RedisCache redisCache;
 
     @Autowired
     private ArticleTagService articleTagService;
@@ -207,6 +207,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public ResponseResult updateArticle(ArticleDto articleDto) {
         Article article = BeanCopyUtils.copyBean(articleDto, Article.class);
         baseMapper.updateById(article);
+
+        return ResponseResult.okResult();
+    }
+
+
+    @Override
+    public ResponseResult deleteArticle(Long id) {
+        baseMapper.deleteById(id);
         return ResponseResult.okResult();
     }
 }

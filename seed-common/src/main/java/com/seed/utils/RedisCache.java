@@ -1,6 +1,9 @@
 package com.seed.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -258,5 +261,15 @@ public class RedisCache
         return redisTemplate.opsForHash().increment(key, hashKey, 1);
     }
 
+    /**
+     * 判断 key是否存在
+     *
+     * @param key 键
+     * @return true 存在 false不存在
+     */
+    public Boolean hasKey(String key)
+    {
+        return redisTemplate.hasKey(key);
+    }
 
 }

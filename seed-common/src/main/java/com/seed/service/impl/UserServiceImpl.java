@@ -20,7 +20,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import static net.sf.jsqlparser.util.validation.metadata.NamedObject.user;
 
 /**
  * @author 77286

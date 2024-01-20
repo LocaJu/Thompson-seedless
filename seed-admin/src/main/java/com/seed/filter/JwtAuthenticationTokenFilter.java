@@ -1,8 +1,9 @@
 package com.seed.filter;
 
 import com.alibaba.fastjson.JSON;
-import com.seed.domain.LoginUser;
+
 import com.seed.domain.ResponseResult;
+import com.seed.domain.model.LoginUser;
 import com.seed.enums.AppHttpCodeEnum;
 import com.seed.utils.JwtUtil;
 import com.seed.utils.RedisCache;

@@ -2,6 +2,7 @@ package com.seed.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.seed.domain.ResponseResult;
+import com.seed.domain.dto.CategoryDTO;
 import com.seed.domain.entity.Category;
 
 /**
@@ -14,4 +15,10 @@ public interface CategoryService extends IService<Category> {
     ResponseResult getCategoryList();
 
     ResponseResult listAllCategory();
+
+    ResponseResult getList(Integer pageNum, Integer pageSize, CategoryDTO category);
+
+    ResponseResult getCategoryDetailById(Long id);
+
+    ResponseResult updateCategory(CategoryDTO category);
 }

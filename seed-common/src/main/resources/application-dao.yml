@@ -3,9 +3,9 @@ spring:
     name: seed-common
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://114.55.31.80:3306/seedless?characterEncoding=utf-8&useSSL=FALSE&useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: root
+    url: jdbc:mysql://114.55.31.80:3306/dip_blog?characterEncoding=utf-8&useSSL=FALSE&useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: dip_blog
+    password: p@ssWor$
   servlet:
     multipart:
       max-file-size: 2MB
@@ -36,3 +36,16 @@ qiniu:
     bucket: seedless-blog
   CDN: http://s66bj54ml.bkt.clouddn.com
 
+ruoyi:
+  captchaType: math
+
+# token配置
+token:
+  header: token
+  secret: hello
+  expireTime: 3600
+# 用户登录配置
+user:
+  password:
+    maxRetryCount: 5
+    lockTime: 60

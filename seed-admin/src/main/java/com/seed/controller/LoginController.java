@@ -2,8 +2,10 @@ package com.seed.controller;
 
 import com.seed.domain.ResponseResult;
 import com.seed.domain.entity.User;
+import com.seed.domain.model.LoginBody;
 import com.seed.enums.AppHttpCodeEnum;
 import com.seed.exception.SystemException;
+import com.seed.ruoyi.core.domain.AjaxResult;
 import com.seed.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -24,16 +26,17 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
-    @PostMapping("/user/login")
-    public ResponseResult login(@RequestBody User user){
-        if(!StringUtils.hasText(user.getUserName())){
+    @PostMapping("/login")
+    public AjaxResult login(@RequestBody LoginBody loginBody){
+        if(!StringUtils.hasText(loginBody.getUsername())){
             //提示 必须要传用户名
             throw new SystemException(AppHttpCodeEnum.REQUIRE_USERNAME);
         }
-        return loginService.login(user);
+
+        return loginService.login(loginBody.getUsername(),loginBody.getPassword(),loginBody.getCode(),loginBody.getUuid());
     }
 
-    @PostMapping("/user/logout")
+    @PostMapping("/logout")
     public ResponseResult logout(){
         return loginService.logout();
     }
