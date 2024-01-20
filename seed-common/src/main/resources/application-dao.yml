@@ -42,10 +42,11 @@ ruoyi:
 # token配置
 token:
   header: token
-  secret: hello
+  secret: abcdefghijklmnopqrstuvwxyz
   expireTime: 3600
 # 用户登录配置
 user:
   password:
     maxRetryCount: 5
     lockTime: 60
+

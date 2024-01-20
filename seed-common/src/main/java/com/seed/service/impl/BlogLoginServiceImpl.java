@@ -7,8 +7,9 @@ import com.seed.domain.model.LoginUser;
 import com.seed.domain.vo.BlogUserInfoVo;
 import com.seed.domain.vo.UserInfoVo;
 import com.seed.service.BlogLoginService;
+import com.seed.service.system.web.service.TokenService;
 import com.seed.utils.BeanCopyUtils;
-import com.seed.utils.JwtUtil;
+
 import com.seed.utils.RedisCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class BlogLoginServiceImpl implements BlogLoginService {
     @Autowired
     private RedisCache redisCache;
 
+    @Autowired
+    private TokenService tokenService;
+
     @Override
     public ResponseResult login(User user) {
 
@@ -51,13 +55,15 @@ public class BlogLoginServiceImpl implements BlogLoginService {
         //获取userId生成token
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
         String userId = loginUser.getUser().getUserId().toString();
-        String jwt = JwtUtil.createJWT(userId);
+//        String token = JwtUtil.createJWT(userId);
+        String token = tokenService.createToken(loginUser);
+
         //把用户信息存入redis
         redisCache.setCacheObject(BLOG_LOGIN+userId,loginUser);
         //把token和userInfo封装 返回
         //将User转换为UserInfoVo
         UserInfoVo userInfoVo = BeanCopyUtils.copyBean(loginUser.getUser(), UserInfoVo.class);
-        BlogUserInfoVo blogUserInfoVo=new BlogUserInfoVo(jwt,userInfoVo);
+        BlogUserInfoVo blogUserInfoVo=new BlogUserInfoVo(token,userInfoVo);
 
         return ResponseResult.okResult(blogUserInfoVo);
     }

@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSON;
 import com.seed.domain.ResponseResult;
 import com.seed.domain.model.LoginUser;
 import com.seed.enums.AppHttpCodeEnum;
-import com.seed.utils.JwtUtil;
+import com.seed.ruoyi.constant.Constants;
+import com.seed.service.system.web.service.TokenService;
+
 import com.seed.utils.RedisCache;
 import com.seed.utils.WebUtils;
 import io.jsonwebtoken.Claims;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
+import static com.seed.ruoyi.constant.CacheConstants.LOGIN_TOKEN_KEY;
 import static com.seed.utils.RedisConstants.LOGIN;
 
 /**
@@ -36,6 +39,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired
     private RedisCache redisCache;
 
+    @Autowired
+    private TokenService tokenService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //获取请求头中的token
@@ -48,7 +54,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         //解析token获取userId
         Claims claims=null;
         try {
-            claims = JwtUtil.parseJWT(token);
+            claims = tokenService.parseToken(token);
+//            claims = JwtUtil.parseJWT(token);
         }catch (Exception e){
             e.printStackTrace();
             //token超时||token非法
@@ -57,9 +64,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             WebUtils.renderString(response, JSON.toJSONString(result));
             return;
         }
-        String userId = claims.getSubject();
+        String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
         //从redis中获取用户信息
-        LoginUser loginUser = redisCache.getCacheObject(LOGIN + userId);
+        LoginUser loginUser = redisCache.getCacheObject(LOGIN_TOKEN_KEY + uuid);
         //如果redis中获取不到
         if (Objects.isNull(loginUser)){
             //说明登录过期

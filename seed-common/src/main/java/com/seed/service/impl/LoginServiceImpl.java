@@ -13,7 +13,8 @@ import com.seed.ruoyi.utils.MessageUtils;
 import com.seed.ruoyi.utils.StringUtils;
 import com.seed.service.LoginService;
 import com.seed.service.system.security.context.AuthenticationContextHolder;
-import com.seed.utils.JwtUtil;
+import com.seed.service.system.web.service.TokenService;
+
 import com.seed.utils.RedisCache;
 import com.seed.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,9 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private RedisCache redisCache;
 
+    @Autowired
+    private TokenService tokenService;
+
     @Override
     public AjaxResult login(String username, String password, String code, String uuid) {
         AjaxResult ajax = AjaxResult.success();
@@ -61,7 +65,9 @@ public class LoginServiceImpl implements LoginService {
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
         //UserDetails loginUser1 = (UserDetails) authenticate.getPrincipal();
         String userId = loginUser.getUser().getUserId().toString();
-        String token = JwtUtil.createJWT(userId);
+//        String token = JwtUtil.createJWT(userId);
+        String token = tokenService.createToken(loginUser);
+
         //把用户信息存入redis
         redisCache.setCacheObject(LOGIN +userId,loginUser);
         //把token和userInfo封装 返回
