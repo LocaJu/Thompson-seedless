@@ -5,7 +5,8 @@ import com.alibaba.fastjson.JSON;
 import com.seed.domain.ResponseResult;
 import com.seed.domain.model.LoginUser;
 import com.seed.enums.AppHttpCodeEnum;
-import com.seed.utils.JwtUtil;
+import com.seed.service.system.web.service.TokenService;
+//import com.seed.utils.JwtUtil;
 import com.seed.utils.RedisCache;
 import com.seed.utils.WebUtils;
 import io.jsonwebtoken.Claims;
@@ -38,6 +39,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired
     private RedisCache redisCache;
 
+    @Autowired
+    private TokenService tokenService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //获取请求头中的token
@@ -48,9 +52,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             return;
         }
         //解析token获取userId
-        Claims claims=null;
+//        Claims claims=null;
+        String uuid=null;
         try {
-            claims = JwtUtil.parseJWT(token);
+            uuid = tokenService.getUsernameFromToken(token);
+//            claims = JwtUtil.parseJWT(token);
         }catch (Exception e){
             e.printStackTrace();
             //token超时||token非法
@@ -59,9 +65,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             WebUtils.renderString(response, JSON.toJSONString(result));
             return;
         }
-        String userId = claims.getSubject();
+//        String userId = claims.getSubject();
         //从redis中获取用户信息
-        LoginUser loginUser = redisCache.getCacheObject(BLOG_LOGIN + userId);
+        LoginUser loginUser = redisCache.getCacheObject(BLOG_LOGIN + uuid);
         //如果redis中获取不到
         if (Objects.isNull(loginUser)){
             //说明登录过期

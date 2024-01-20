@@ -2,9 +2,11 @@ package com.seed.config;
 
 
 import com.seed.filter.JwtAuthenticationTokenFilter;
+import com.seed.handler.config.LogoutSuccessHandlerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -43,34 +45,53 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     AccessDeniedHandler accessDeniedHandler;
 
 
+    /**
+     * 退出处理类
+     */
+    @Autowired
+    private LogoutSuccessHandlerImpl logoutSuccessHandler;
+
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
                 //关闭csrf
                 .csrf().disable()
                 //不通过Session获取SecurityContext
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                // 对于登录接口 允许匿名访问
-                .antMatchers("/user/login").anonymous()
-                .antMatchers("/login").anonymous()
-                .antMatchers("/logout").authenticated()//认证之后再退出登录
+                // 对于登录login 注册register 验证码captchaImage 允许匿名访问
+                .antMatchers("/login", "/register", "/captchaImage").permitAll()
+                // 静态资源，可匿名访问
+                .antMatchers(HttpMethod.GET, "/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", "/profile/**").permitAll()
+                .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/*/api-docs", "/druid/**").permitAll()
+                // 除上面外的所有请求全部需要鉴权认证
+                .anyRequest().authenticated()
+                .and()
+                .headers().frameOptions().disable();
+//                .antMatchers("/user/login").anonymous()
+//                .antMatchers("/login").anonymous()
+                //认证
+//                .antMatchers("/logout").authenticated()//认证之后再退出登录
 //                .antMatchers("/user/userInfo").authenticated()
 //                .antMatchers("/upload").authenticated()
-                .antMatchers("/content/tag/list").authenticated()
-                // 除上面外的所有请求全部不需要认证即可访问
-                .anyRequest().permitAll();
+//                .antMatchers("/content/tag/list").authenticated()
+//                .antMatchers("/login/getInfo").authenticated()
+//                // 除上面外的所有请求全部不需要认证即可访问
+//                .anyRequest().permitAll();
+        // 添加Logout filter
+        httpSecurity.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         //配置认证 授权异常处理器
-        http.exceptionHandling()
+        httpSecurity.exceptionHandling()
                         .authenticationEntryPoint(authenticationEntryPoint)//认证
                         .accessDeniedHandler(accessDeniedHandler);          //授权
 
-        http.logout().disable();//关闭security默认的退出登录
+//        httpSecurity.logout().disable();//关闭security默认的退出登录
         //把jwtAuthenticationTokenFilter添加到SpringSecurity的过滤器链中
-        http.addFilterBefore(jwtAuthenticationTokenFilter,UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter,UsernamePasswordAuthenticationFilter.class);
         //允许跨域
-        http.cors();
+        httpSecurity.cors();
     }
 
 
