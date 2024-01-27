@@ -13,7 +13,7 @@ import java.util.List;
  * 
  * @author ruoyi
  */
-@Mapper
+
 public interface SysRoleMenuMapper
 {
     /**

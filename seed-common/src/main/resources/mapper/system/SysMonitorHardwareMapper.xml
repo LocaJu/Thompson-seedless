@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seed.mapper.system.SysHardwareMonitorMapper">
+
+    <resultMap type="com.seed.domain.entity.system.HardwareMonitor" id="HardwareMonitorResult">
+        <id     property="id"        	 column="id"       />
+        <result property="hardware"      column="hardware"     />
+        <result property="useage"        column="useage"     />
+        <result property="createTime"    column="create_time"     />
+    </resultMap>
+
+    <sql id="selectHardwareMonitorVo">
+        select id, hardware, useage, create_time
+        from sys_monitor_hardware
+    </sql>
+
+    <select id="selectHardwareMonitor" resultMap="HardwareMonitorResult">
+        <include refid="selectHardwareMonitorVo"/>
+        <where>
+            <if test="hardware != null and hardware != ''">
+                and hardware = #{hardware}
+            </if>
+            <if test="start != null and start != ''"><!-- 开始时间检索 -->
+                and create_time::TIMESTAMP &gt;= to_timestamp(#{start},'yyyy-MM-dd HH24:MI:ss')
+            </if>
+            <if test="end != null and end != ''"><!-- 结束时间检索 -->
+                and create_time::TIMESTAMP &lt;= to_timestamp(#{end},'yyyy-MM-dd HH24:MI:ss')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="selectHardwareUseage" resultType="BigDecimal">
+        select useage from sys_monitor_hardware
+        <where>
+            <if test="hardware != null and hardware != ''">
+                and hardware = #{hardware}
+            </if>
+            <if test="start != null and start != ''"><!-- 开始时间检索 -->
+                and create_time::TIMESTAMP &gt;= to_timestamp(#{start},'yyyy-MM-dd HH24:MI:ss')
+            </if>
+            <if test="end != null and end != ''"><!-- 结束时间检索 -->
+                and create_time::TIMESTAMP &lt;= to_timestamp(#{end},'yyyy-MM-dd HH24:MI:ss')
+            </if>
+        </where>
+        order by create_time desc limit 60 offset 0
+    </select>
+
+    <insert id="batchInsert" parameterType="List">
+        insert into sys_monitor_hardware (id, hardware, useage, create_time)
+        values
+        <foreach collection="list" item="e" index="index" separator=",">
+            (#{e.id,jdbcType=VARCHAR}, #{e.hardware,jdbcType=VARCHAR}, #{e.useage,jdbcType=VARCHAR},
+            #{e.createTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+
+    <delete id="deleteBefore">
+        delete from sys_monitor_hardware where (SELECT now() - interval '1 hour') >= create_time::TIMESTAMP
+    </delete>
+</mapper>

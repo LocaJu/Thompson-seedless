@@ -5,13 +5,12 @@ import com.alibaba.fastjson.JSON;
 import com.seed.domain.ResponseResult;
 import com.seed.enums.AppHttpCodeEnum;
 import com.seed.utils.WebUtils;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -23,10 +22,15 @@ import java.io.IOException;
 @Component
 public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
     @Override
-    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, jakarta.servlet.ServletException {
         e.printStackTrace();
         ResponseResult result = ResponseResult.errorResult(AppHttpCodeEnum.NO_OPERATOR_AUTH);
         //响应给前端
-        WebUtils.renderString(httpServletResponse, JSON.toJSONString(result));
+        WebUtils.renderString(response, JSON.toJSONString(result));
     }
+
+//    @Override
+//    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
+//
+//    }
 }

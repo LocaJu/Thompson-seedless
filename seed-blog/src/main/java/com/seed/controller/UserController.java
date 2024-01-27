@@ -4,8 +4,7 @@ import com.seed.annotation.SystemLog;
 import com.seed.domain.ResponseResult;
 import com.seed.domain.dto.UserInfoDTO;
 import com.seed.domain.dto.UserRegiterDTO;
-import com.seed.domain.vo.UserInfoVo;
-import com.seed.service.UserService;
+import com.seed.service.system.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserService userService;
+    private ISysUserService userService;
     @GetMapping("/userInfo")
     public ResponseResult userInfo(){
         return userService.userInfo();

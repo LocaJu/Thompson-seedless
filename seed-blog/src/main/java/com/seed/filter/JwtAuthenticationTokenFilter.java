@@ -1,16 +1,16 @@
 package com.seed.filter;
 
 import com.alibaba.fastjson.JSON;
-
 import com.seed.domain.ResponseResult;
 import com.seed.domain.model.LoginUser;
 import com.seed.enums.AppHttpCodeEnum;
 import com.seed.service.system.web.service.TokenService;
-//import com.seed.utils.JwtUtil;
 import com.seed.utils.RedisCache;
 import com.seed.utils.WebUtils;
-import io.jsonwebtoken.Claims;
-import org.jetbrains.annotations.NotNull;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,12 +18,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.Objects;
 
 import static com.seed.utils.RedisConstants.BLOG_LOGIN;
@@ -43,7 +40,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private TokenService tokenService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //获取请求头中的token
         String token = request.getHeader("token");
         if (!StringUtils.hasText(token)){

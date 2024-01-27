@@ -3,8 +3,7 @@ package com.seed;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author 77286
@@ -14,6 +13,7 @@ import org.springframework.context.annotation.FilterType;
  */
 @SpringBootApplication
 @MapperScan(basePackages = {"com.seed.mapper"})
+@EnableScheduling
 public class BlogAdminApplication {
     public static void main(String[] args) {
         SpringApplication.run(BlogAdminApplication.class, args);

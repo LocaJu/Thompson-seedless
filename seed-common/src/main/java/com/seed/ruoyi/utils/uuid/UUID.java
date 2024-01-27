@@ -4,7 +4,9 @@ package com.seed.ruoyi.utils.uuid;
 
 
 
-import com.sun.xml.ws.util.UtilException;
+
+
+import com.seed.ruoyi.exception.UtilException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

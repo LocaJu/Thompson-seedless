@@ -1,9 +1,7 @@
 package com.seed.mapper.system;
 
 
-
 import com.seed.domain.entity.system.SysConfig;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -12,7 +10,7 @@ import java.util.List;
  * 
  * @author ruoyi
  */
-@Mapper
+
 public interface SysConfigMapper
 {
     /**

@@ -2,7 +2,8 @@ package com.seed.service.impl;
 
 
 import com.seed.domain.ResponseResult;
-import com.seed.domain.entity.User;
+
+import com.seed.domain.entity.system.SysUser;
 import com.seed.domain.model.LoginUser;
 import com.seed.domain.vo.BlogUserInfoVo;
 import com.seed.domain.vo.UserInfoVo;
@@ -44,7 +45,7 @@ public class BlogLoginServiceImpl implements BlogLoginService {
     private TokenService tokenService;
 
     @Override
-    public ResponseResult login(User user) {
+    public ResponseResult login(SysUser user) {
 
         UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);

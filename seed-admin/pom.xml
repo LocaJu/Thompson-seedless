@@ -22,7 +22,9 @@
             <artifactId>seed-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-<!--        <dependency>-->
+
+
+        <!--        <dependency>-->
 <!--            <groupId>com.thompson</groupId>-->
 <!--            <artifactId>ruoyi-system</artifactId>-->
 <!--            <version>1.0-SNAPSHOT</version>-->

@@ -7,12 +7,12 @@ import com.seed.ruoyi.annotation.Excel.ColumnType;
 import com.seed.ruoyi.annotation.Excels;
 import com.seed.ruoyi.core.domain.BaseEntity;
 import com.seed.ruoyi.utils.xss.Xss;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 

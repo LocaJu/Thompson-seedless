@@ -1,16 +1,18 @@
 package com.seed.filter;
 
 import com.alibaba.fastjson.JSON;
-
 import com.seed.domain.ResponseResult;
 import com.seed.domain.model.LoginUser;
 import com.seed.enums.AppHttpCodeEnum;
 import com.seed.ruoyi.constant.Constants;
 import com.seed.service.system.web.service.TokenService;
-
 import com.seed.utils.RedisCache;
 import com.seed.utils.WebUtils;
 import io.jsonwebtoken.Claims;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,15 +20,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
 import static com.seed.ruoyi.constant.CacheConstants.LOGIN_TOKEN_KEY;
-import static com.seed.utils.RedisConstants.LOGIN;
 
 /**
  * @author 77286
@@ -43,7 +40,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private TokenService tokenService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //获取请求头中的token
         String token = request.getHeader("token");
         if (!StringUtils.hasText(token)){
@@ -79,4 +76,23 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         filterChain.doFilter(request,response);
     }
+
+//    @Autowired
+//    private TokenService tokenService;
+//
+//
+//    @Override
+//    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+//            throws ServletException, IOException
+//    {
+//        LoginUser loginUser = tokenService.getLoginUser(request);
+//        if (Objects.nonNull(loginUser) && Objects.nonNull(SecurityUtils.getAuthentication()))
+//        {
+//            tokenService.verifyToken(loginUser);
+//            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
+//            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+//            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+//        }
+//        chain.doFilter(request, response);
+//    }
 }

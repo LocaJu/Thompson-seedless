@@ -2,9 +2,10 @@ package com.seed.ruoyi.core.config;
 
 
 import com.seed.ruoyi.utils.ServletUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * 服务相关配置
