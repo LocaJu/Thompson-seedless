@@ -12,6 +12,7 @@ import com.seed.service.system.web.service.TokenService;
 import com.seed.utils.BeanCopyUtils;
 
 import com.seed.utils.RedisCache;
+import com.seed.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -72,7 +73,7 @@ public class BlogLoginServiceImpl implements BlogLoginService {
     @Override
     public ResponseResult logout() {
         //获取token 解析获取userId
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityUtils.getAuthentication();
         LoginUser loginUser = (LoginUser)authentication.getPrincipal();
         //获取userId
         Long userId = loginUser.getUser().getUserId();

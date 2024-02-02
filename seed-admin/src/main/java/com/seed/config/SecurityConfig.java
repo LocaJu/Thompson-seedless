@@ -106,7 +106,7 @@ public class SecurityConfig {
                                 //状态监控websocket
                                 .requestMatchers("/websocket/**").permitAll()
                                 ////若要给应用程序发送请求，则发送请求的用户必须先通过认证
-                                .anyRequest().fullyAuthenticated())
+                                .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
 
         //4、安全策略

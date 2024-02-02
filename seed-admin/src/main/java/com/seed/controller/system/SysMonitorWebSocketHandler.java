@@ -1,6 +1,7 @@
 package com.seed.controller.system;
 
-import com.alibaba.fastjson.JSONArray;
+
+import com.alibaba.fastjson2.JSONArray;
 import com.seed.domain.entity.system.SysMoitor;
 import com.seed.ruoyi.core.domain.SysMoitorVo;
 import com.seed.utils.RedisCache;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Controller;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -44,7 +44,8 @@ public class SysMonitorWebSocketHandler {
             sysMoitorVos.add(new SysMoitorVo(item));
         });
         finalTime = nowTime;
-        return new JSONArray(Collections.singletonList(sysMoitorVos));
+
+        return new JSONArray(sysMoitorVos);
     }
 
     @Scheduled(

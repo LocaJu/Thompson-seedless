@@ -72,14 +72,6 @@ public class SysMoitorVo {
      */
     private String createTime;
 
-    /**
-     *
-     */
-    private String id;
-
-    public SysMoitorVo(String sysTotalMemory, String sysFreeMemory, String cpuCore, String jvmHeapMemoryMax, String jvmHeapMemoryUsed, String sysCpuUsed, String jvmCpuUsed, String diskTotalSize, String diskFreeSize, String database, String redis, String createTime) {
-    }
-
     public SysMoitorVo(SysMoitor sysMoitor) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         /* 37 */

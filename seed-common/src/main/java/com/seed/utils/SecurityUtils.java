@@ -85,6 +85,8 @@ public class SecurityUtils
         }
     }
 
+
+
     /**
      * 获取Authentication
      */
@@ -179,4 +181,7 @@ public class SecurityUtils
                 .anyMatch(x -> Constants.SUPER_ADMIN.equals(x) || PatternMatchUtils.simpleMatch(x, role));
     }
 
+    public static void setAuthentication(Authentication authentication) {
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
 }
