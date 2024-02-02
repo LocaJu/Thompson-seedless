@@ -67,7 +67,6 @@
             ,#{database,jdbcType=VARCHAR},#{redis,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP}
             ,#{id,jdbcType=BIGINT})
         </foreach>
-
     </insert>
 
     <insert id="insertSelective">

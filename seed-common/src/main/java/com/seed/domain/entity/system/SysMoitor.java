@@ -7,6 +7,7 @@ import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.seed.ruoyi.core.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SysMoitor implements Serializable {
+public class SysMoitor  implements Serializable {
     /**
      * 
      */
@@ -80,12 +81,15 @@ public class SysMoitor implements Serializable {
      */
     private LocalDateTime createTime;
 
+    private long id;
 
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
+    public SysMoitor(long sysTotalMemory, long sysFreeMemory, long cpuCore, long jvmHeapMemoryMax, long jvmHeapMemoryUsed, double sysCpuUsed, double jvmCpuUsed, long diskTotalSize, long diskFreeSize, String database, String redis, LocalDateTime createTime) {
 
+    }
 
 
     public static SysMoitorBuilder builder() {
