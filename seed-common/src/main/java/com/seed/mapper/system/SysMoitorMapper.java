@@ -17,7 +17,7 @@ public interface SysMoitorMapper {
 
     int insert(SysMoitor record);
 
-    void insertBatch(@Param("sysMoitorSet") Set<SysMoitor> record);
+    void insertBatch(@Param("sysMoitorSet") Set<SysMoitor> sysMoitorSet);
 
     int insertSelective(SysMoitor record);
 

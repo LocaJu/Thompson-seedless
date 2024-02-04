@@ -81,15 +81,12 @@ public class SysMoitor  implements Serializable {
      */
     private LocalDateTime createTime;
 
-    private long id;
 
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
-    public SysMoitor(long sysTotalMemory, long sysFreeMemory, long cpuCore, long jvmHeapMemoryMax, long jvmHeapMemoryUsed, double sysCpuUsed, double jvmCpuUsed, long diskTotalSize, long diskFreeSize, String database, String redis, LocalDateTime createTime) {
 
-    }
 
 
     public static SysMoitorBuilder builder() {
@@ -108,6 +105,7 @@ public class SysMoitor  implements Serializable {
         private String database;
         private String redis;
         private LocalDateTime createTime;
+
 
         public SysMoitorBuilder sysTotalMemory(long sysTotalMemory) {
             this.sysTotalMemory = sysTotalMemory;
