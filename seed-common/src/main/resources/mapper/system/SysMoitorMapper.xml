@@ -17,40 +17,27 @@
             <result property="database" column="database" jdbcType="VARCHAR"/>
             <result property="redis" column="redis" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="id" column="id" jdbcType="BIGINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         sys_total_memory,sys_free_memory,cpu_core,
         jvm_heap_memory_max,jvm_heap_memory_used,sys_cpu_used,
         jvm_cpu_used,disk_total_size,disk_free_size,
-        database,redis,create_time,
-        id
+        database,redis,create_time
     </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from sys_moitor
-        where 
-    </select>
-
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from sys_moitor
-        where 
-    </delete>
     <insert id="insert">
         insert into sys_moitor
         ( sys_total_memory,sys_free_memory,cpu_core
         ,jvm_heap_memory_max,jvm_heap_memory_used,sys_cpu_used
         ,jvm_cpu_used,disk_total_size,disk_free_size
         ,database,redis,create_time
-        ,id)
+        )
         values (#{sysTotalMemory,jdbcType=BIGINT},#{sysFreeMemory,jdbcType=BIGINT},#{cpuCore,jdbcType=BIGINT}
         ,#{jvmHeapMemoryMax,jdbcType=BIGINT},#{jvmHeapMemoryUsed,jdbcType=BIGINT},#{sysCpuUsed,jdbcType=DECIMAL}
         ,#{jvmCpuUsed,jdbcType=DECIMAL},#{diskTotalSize,jdbcType=BIGINT},#{diskFreeSize,jdbcType=BIGINT}
         ,#{database,jdbcType=VARCHAR},#{redis,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP}
-        ,#{id,jdbcType=BIGINT})
+        )
     </insert>
 
     <insert id="insertBatch">
@@ -58,14 +45,14 @@
         ,jvm_heap_memory_max,jvm_heap_memory_used,sys_cpu_used
         ,jvm_cpu_used,disk_total_size,disk_free_size
         ,database,redis,create_time
-        ,id)
+        )
         VALUES
         <foreach collection="sysMoitorSet" item="item" separator=",">
             (#{sysTotalMemory,jdbcType=BIGINT},#{sysFreeMemory,jdbcType=BIGINT},#{cpuCore,jdbcType=BIGINT}
             ,#{jvmHeapMemoryMax,jdbcType=BIGINT},#{jvmHeapMemoryUsed,jdbcType=BIGINT},#{sysCpuUsed,jdbcType=DECIMAL}
             ,#{jvmCpuUsed,jdbcType=DECIMAL},#{diskTotalSize,jdbcType=BIGINT},#{diskFreeSize,jdbcType=BIGINT}
             ,#{database,jdbcType=VARCHAR},#{redis,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP}
-            ,#{id,jdbcType=BIGINT})
+            )
         </foreach>
 
     </insert>
@@ -85,7 +72,6 @@
                 <if test="database != null">database,</if>
                 <if test="redis != null">redis,</if>
                 <if test="createTime != null">create_time,</if>
-                <if test="id != null">id,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="sysTotalMemory != null">#{sysTotalMemory,jdbcType=BIGINT},</if>
@@ -100,70 +86,6 @@
                 <if test="database != null">#{database,jdbcType=VARCHAR},</if>
                 <if test="redis != null">#{redis,jdbcType=VARCHAR},</if>
                 <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
-                <if test="id != null">#{id,jdbcType=BIGINT},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.seed.domain.entity.system.SysMoitor">
-        update sys_moitor
-        <set>
-                <if test="sysTotalMemory != null">
-                    sys_total_memory = #{sysTotalMemory,jdbcType=BIGINT},
-                </if>
-                <if test="sysFreeMemory != null">
-                    sys_free_memory = #{sysFreeMemory,jdbcType=BIGINT},
-                </if>
-                <if test="cpuCore != null">
-                    cpu_core = #{cpuCore,jdbcType=BIGINT},
-                </if>
-                <if test="jvmHeapMemoryMax != null">
-                    jvm_heap_memory_max = #{jvmHeapMemoryMax,jdbcType=BIGINT},
-                </if>
-                <if test="jvmHeapMemoryUsed != null">
-                    jvm_heap_memory_used = #{jvmHeapMemoryUsed,jdbcType=BIGINT},
-                </if>
-                <if test="sysCpuUsed != null">
-                    sys_cpu_used = #{sysCpuUsed,jdbcType=DECIMAL},
-                </if>
-                <if test="jvmCpuUsed != null">
-                    jvm_cpu_used = #{jvmCpuUsed,jdbcType=DECIMAL},
-                </if>
-                <if test="diskTotalSize != null">
-                    disk_total_size = #{diskTotalSize,jdbcType=BIGINT},
-                </if>
-                <if test="diskFreeSize != null">
-                    disk_free_size = #{diskFreeSize,jdbcType=BIGINT},
-                </if>
-                <if test="database != null">
-                    database = #{database,jdbcType=VARCHAR},
-                </if>
-                <if test="redis != null">
-                    redis = #{redis,jdbcType=VARCHAR},
-                </if>
-                <if test="createTime != null">
-                    create_time = #{createTime,jdbcType=TIMESTAMP},
-                </if>
-                <if test="id != null">
-                    id = #{id,jdbcType=BIGINT},
-                </if>
-        </set>
-        where  
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.seed.domain.entity.system.SysMoitor">
-        update sys_moitor
-        set 
-            sys_total_memory =  #{sysTotalMemory,jdbcType=BIGINT},
-            sys_free_memory =  #{sysFreeMemory,jdbcType=BIGINT},
-            cpu_core =  #{cpuCore,jdbcType=BIGINT},
-            jvm_heap_memory_max =  #{jvmHeapMemoryMax,jdbcType=BIGINT},
-            jvm_heap_memory_used =  #{jvmHeapMemoryUsed,jdbcType=BIGINT},
-            sys_cpu_used =  #{sysCpuUsed,jdbcType=DECIMAL},
-            jvm_cpu_used =  #{jvmCpuUsed,jdbcType=DECIMAL},
-            disk_total_size =  #{diskTotalSize,jdbcType=BIGINT},
-            disk_free_size =  #{diskFreeSize,jdbcType=BIGINT},
-            database =  #{database,jdbcType=VARCHAR},
-            redis =  #{redis,jdbcType=VARCHAR},
-            create_time =  #{createTime,jdbcType=TIMESTAMP},
-            id =  #{id,jdbcType=BIGINT}
-        where  
-    </update>
 </mapper>
