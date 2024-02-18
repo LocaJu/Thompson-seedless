@@ -47,7 +47,7 @@ public class SystemMoitorService {
     private void systemMonitor() {
 
         SysMoitor sysMoitor = SysMoitor.builder().createTime(LocalDateTime.now()).sysTotalMemory(this.getSystemTotalMemory()).sysFreeMemory(this.getSystemFreeMemory()).cpuCore((long)this.getCpuCore()).jvmHeapMemoryMax(this.getJVMMaxMemory()).jvmHeapMemoryUsed(this.getJVMHeapMemoryUsed()).sysCpuUsed(this.getSysCpuUsed()).jvmCpuUsed(this.getJvmCpuUsed()).diskTotalSize(this.getDiskTotalSize()).diskFreeSize(this.getDiskFreeSize()).database(this.getDatabaseHealthInfo()).redis(this.getRedisHealthInfo()).build();
-        this.redisCache.addDataToSortedSet("system:monitor", sysMoitor, (double)System.currentTimeMillis());
+        this.redisCache.addDataToSortedSet(MONITOR_KEY, sysMoitor, (double)System.currentTimeMillis());
     }
 
     @Scheduled(
