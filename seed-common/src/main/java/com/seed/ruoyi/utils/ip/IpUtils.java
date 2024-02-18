@@ -3,8 +3,8 @@ package com.seed.ruoyi.utils.ip;
 
 import com.seed.ruoyi.utils.ServletUtils;
 import com.seed.ruoyi.utils.StringUtils;
+import jakarta.servlet.http.HttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 

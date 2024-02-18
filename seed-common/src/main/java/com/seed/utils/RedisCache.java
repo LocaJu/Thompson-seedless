@@ -2,13 +2,12 @@ package com.seed.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.core.BoundSetOperations;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -272,4 +271,30 @@ public class RedisCache
         return redisTemplate.hasKey(key);
     }
 
+
+
+
+    public <T> T getHighSocreItemFormZset(String key) {
+        ZSetOperations<String, T> zSetOps = this.redisTemplate.opsForZSet();
+        Set<T> highestScoreMembers = zSetOps.reverseRange(key, 0L, 0L);
+        if (!CollectionUtils.isEmpty(highestScoreMembers)) {
+            T max = highestScoreMembers.iterator().next();
+            return max;
+        } else {
+            return null;
+        }
+    }
+
+    public <T> void addDataToSortedSet(String key, T value, double score) {
+        this.redisTemplate.opsForZSet().add(key, value, score);
+    }
+
+    public <T> Set<T> getDataSetByRange(String key, long start, long end) {
+        Set<T> set = this.redisTemplate.opsForZSet().rangeByScore(key, (double)start, (double)end);
+        return set;
+    }
+
+    public void removeDataSetByRange(String key, long start, long end) {
+        this.redisTemplate.opsForZSet().removeRangeByScore(key, (double)start, (double)end);
+    }
 }

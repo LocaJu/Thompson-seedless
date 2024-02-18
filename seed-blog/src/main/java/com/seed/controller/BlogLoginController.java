@@ -2,7 +2,7 @@ package com.seed.controller;
 
 
 import com.seed.domain.ResponseResult;
-import com.seed.domain.entity.User;
+import com.seed.domain.entity.system.SysUser;
 import com.seed.enums.AppHttpCodeEnum;
 import com.seed.exception.SystemException;
 import com.seed.service.BlogLoginService;
@@ -26,7 +26,7 @@ public class BlogLoginController {
     private BlogLoginService blogLoginService;
 
     @RequestMapping("/login")
-    public ResponseResult login(@RequestBody User user){
+    public ResponseResult login(@RequestBody SysUser user){
         if (!StringUtils.hasText(user.getUserName())){
             //提示 必须要传用户名
             throw new SystemException(AppHttpCodeEnum.REQUIRE_USERNAME);

@@ -1,6 +1,7 @@
 package com.seed.domain.vo;
 
-import com.seed.domain.entity.Menu;
+
+import com.seed.domain.entity.system.SysMenu;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoutersVo {
-    private List<Menu> menus;
+    private List<SysMenu> menus;
 }

@@ -2,7 +2,6 @@ package com.seed.mapper.system;
 
 
 import com.seed.domain.entity.system.SysUser;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
  * 
  * @author ruoyi
  */
-@Mapper
+
 public interface SysUserMapper
 {
     /**
@@ -46,7 +45,13 @@ public interface SysUserMapper
      * @return 用户对象信息
      */
     public SysUser selectUserByUserName(String userName);
-
+    /**
+     * 通过昵称查询用户
+     *
+     * @param nickName 昵称
+     * @return 用户对象信息
+     */
+    SysUser selectUserByNickName(String nickName);
     /**
      * 通过用户ID查询用户
      * 

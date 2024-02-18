@@ -15,6 +15,7 @@ import com.seed.service.system.ISysPostService;
 import com.seed.service.system.ISysRoleService;
 import com.seed.service.system.ISysUserService;
 import com.seed.utils.SecurityUtils;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,7 +23,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

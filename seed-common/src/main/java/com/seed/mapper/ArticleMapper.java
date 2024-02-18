@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
 * @createDate 2023-12-10 16:18:36
 * @Entity seed.domain.Article
 */
-@Mapper
+
 public interface ArticleMapper extends BaseMapper<Article> {
 
 

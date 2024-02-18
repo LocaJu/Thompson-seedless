@@ -2,6 +2,9 @@ package com.seed.service.system;
 
 
 
+import com.seed.domain.ResponseResult;
+import com.seed.domain.dto.UserInfoDTO;
+import com.seed.domain.dto.UserRegiterDTO;
 import com.seed.domain.entity.system.SysUser;
 
 import java.util.List;
@@ -13,6 +16,14 @@ import java.util.List;
  */
 public interface ISysUserService
 {
+
+    ResponseResult userInfo();
+
+    ResponseResult updateUserInfo(UserInfoDTO userInfoDTO);
+
+    ResponseResult register(UserRegiterDTO userRegiterDTO);
+
+
     /**
      * 根据条件分页查询用户列表
      * 
@@ -71,7 +82,7 @@ public interface ISysUserService
 
     /**
      * 校验用户名称是否唯一
-     * 
+     *
      * @param user 用户信息
      * @return 结果
      */
@@ -206,4 +217,7 @@ public interface ISysUserService
      * @return 结果
      */
     public String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName);
+
+
+
 }

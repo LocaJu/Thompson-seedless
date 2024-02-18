@@ -2,7 +2,8 @@ package com.seed.service.impl;
 
 
 import com.seed.domain.ResponseResult;
-import com.seed.domain.entity.User;
+
+import com.seed.domain.entity.system.SysUser;
 import com.seed.domain.model.LoginUser;
 import com.seed.domain.vo.BlogUserInfoVo;
 import com.seed.domain.vo.UserInfoVo;
@@ -11,6 +12,7 @@ import com.seed.service.system.web.service.TokenService;
 import com.seed.utils.BeanCopyUtils;
 
 import com.seed.utils.RedisCache;
+import com.seed.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,7 +46,7 @@ public class BlogLoginServiceImpl implements BlogLoginService {
     private TokenService tokenService;
 
     @Override
-    public ResponseResult login(User user) {
+    public ResponseResult login(SysUser user) {
 
         UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
@@ -71,7 +73,7 @@ public class BlogLoginServiceImpl implements BlogLoginService {
     @Override
     public ResponseResult logout() {
         //获取token 解析获取userId
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityUtils.getAuthentication();
         LoginUser loginUser = (LoginUser)authentication.getPrincipal();
         //获取userId
         Long userId = loginUser.getUser().getUserId();

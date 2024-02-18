@@ -1,4 +1,6 @@
 spring:
+  main:
+    allow-circular-references: true
   application:
     name: seed-common
   datasource:
@@ -10,11 +12,12 @@ spring:
     multipart:
       max-file-size: 2MB
       max-request-size: 5MB
-  redis:
-    database: 1
-    host: 114.55.31.80
-    port: 6379
-    password: qq772866144
+  data:
+    redis:
+      database: 1
+      host: 114.55.31.80
+      port: 6379
+      password: qq772866144
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -27,6 +30,7 @@ mybatis-plus:
       #  configuration:
       #是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名A_COLUMN(下滑线命名)到经典Java属性aColumn(驼峰命名)的类似映射
   #    map-underscore-to-camel-case: false
+#  mapper-locations: classpath:mapper/*.xml,classpath:mapper/system/*.xml #mapper文件路径
 
 #七牛云存储
 qiniu:
@@ -50,3 +54,18 @@ user:
     maxRetryCount: 5
     lockTime: 60
 
+#  #Actuator可对外默认的服务，*表示显示所有
+#management:
+#  server:
+#    port: 8083
+#    address: localhost
+#
+#  endpoints:
+#    web:
+#      exposure:
+#        exclude: *
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

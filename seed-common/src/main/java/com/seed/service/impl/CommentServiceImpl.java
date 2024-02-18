@@ -12,7 +12,8 @@ import com.seed.enums.AppHttpCodeEnum;
 import com.seed.exception.SystemException;
 import com.seed.service.CommentService;
 import com.seed.mapper.CommentMapper;
-import com.seed.service.UserService;
+
+import com.seed.service.system.ISysUserService;
 import com.seed.utils.BeanCopyUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
 implements CommentService{
 
     @Autowired
-     private UserService userService;
+     private ISysUserService userService;
     @Override
     public ResponseResult commentList(String commentType,Long articleId, Integer pageNum, Integer pageSize) {
         //查询对应文章的根评论
@@ -110,13 +111,13 @@ implements CommentService{
         //遍历Vo集合
         for (CommentVo commentVo : commentVos) {
             //通过creatBy查询用户的昵称并赋值
-            String nickName = userService.getById(commentVo.getCreateBy()).getNickName();
+            String nickName = userService.selectUserById(commentVo.getCreateBy()).getNickName();
             commentVo.setUsername(nickName);
 
             //通过toCommentUserId查询用户的昵称并赋值
             //如果toCommentUserId不为-1才进行查询
             if (commentVo.getToCommentUserId()!=-1){
-                String toCommentUserName = userService.getById(commentVo.getToCommentUserId()).getNickName();
+                String toCommentUserName = userService.selectUserById(commentVo.getToCommentUserId()).getNickName();
                 commentVo.setToCommentUserName(toCommentUserName);
             }
         }

@@ -6,12 +6,13 @@ import com.seed.ruoyi.core.config.RuoYiConfig;
 import com.seed.ruoyi.utils.DateUtils;
 import com.seed.ruoyi.utils.StringUtils;
 import com.seed.ruoyi.utils.uuid.IdUtils;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import java.io.*;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;

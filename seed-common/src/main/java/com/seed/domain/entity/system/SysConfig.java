@@ -4,11 +4,12 @@ package com.seed.domain.entity.system;
 import com.seed.ruoyi.annotation.Excel;
 import com.seed.ruoyi.annotation.Excel.ColumnType;
 import com.seed.ruoyi.core.domain.BaseEntity;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+
 
 /**
  * 参数配置表 sys_config

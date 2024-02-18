@@ -1,9 +1,10 @@
 package com.seed.utils;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

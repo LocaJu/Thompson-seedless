@@ -1,8 +1,9 @@
 package com.seed.ruoyi.utils.sql;
 
 
+import com.seed.ruoyi.exception.UtilException;
 import com.seed.ruoyi.utils.StringUtils;
-import com.sun.xml.ws.util.UtilException;
+
 
 
 /**

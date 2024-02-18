@@ -28,3 +28,14 @@ mybatis-plus:
       id-type: auto
       logic-delete-value: 1
       logic-delete-field: delFlag
+management:
+  endpoints:
+    web:
+      cors:
+        allowed-origin-patterns: http://localhost:8989
+        allowed-methods: GET, POST, PUT, DELETE, OPTIONS
+        allowed-headers: Content-Type, Authorization, X-Requested-With
+        allow-credentials: true
+        max-age: 1800
+        allowed-origins: http://localhost:8989
+
