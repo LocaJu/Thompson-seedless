@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<!-- 日志存放路径 -->
-	<property name="log.path" value="../logs"/>
+	<property name="log.path" value="./logs"/>
 	<property name="log.module" value="seed-blog"/>
 
 	<!-- 日志输出格式 -->
@@ -33,7 +33,7 @@
 
 
 	<!-- 系统模块日志级别控制  -->
-	<logger name="com.zzkrst" level="INFO"/>
+	<logger name="com.seed" level="INFO"/>
 	<!-- Spring日志级别控制  -->
 	<logger name="org.springframework" level="INFO"/>
 

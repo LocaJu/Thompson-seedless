@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<!-- 日志存放路径 -->
-	<property name="log.path" value="../logs"/>
+	<property name="log.path" value="./logs"/>
 	<property name="log.module" value="seed-blog"/>
 
 	<!-- 日志输出格式 -->
@@ -25,6 +25,7 @@
 			<!--日志文件保留天数 -->
 			<MaxHistory>10</MaxHistory>
 			<maxFileSize>100MB</maxFileSize>
+			<charset>UTF-8</charset>
 		</rollingPolicy>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<pattern>${log.pattern.file}</pattern>
@@ -33,7 +34,7 @@
 
 
 	<!-- 系统模块日志级别控制  -->
-	<logger name="com.zzkrst" level="INFO"/>
+	<logger name="com.seed" level="INFO"/>
 	<!-- Spring日志级别控制  -->
 	<logger name="org.springframework" level="INFO"/>
 
@@ -45,7 +46,7 @@
 	<logger name="java.sql.PreparedStatement" level="INFO"/>
 
 	<!-- 日志输出级别 -->
-	<root level="INFO">
+	<root level="DEBUG">
 		<appender-ref ref="STDOUT"/>
 		<appender-ref ref="FILE"/>
 	</root>
