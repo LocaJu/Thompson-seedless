@@ -1,6 +1,0 @@
-com\seed\domain\entity\Article.class
-com\seed\mapper\ArticleMapper.class
-com\seed\enums\AppHttpCodeEnum.class
-com\seed\service\ArticleService.class
-com\seed\service\impl\ArticleServiceImpl.class
-com\seed\domain\ResponseResult.class

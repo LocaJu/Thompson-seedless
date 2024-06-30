@@ -7,7 +7,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://114.55.31.80:3306/dip_blog?characterEncoding=utf-8&useSSL=FALSE&useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: dip_blog
-    password: p@ssWor$
+    password: dip_blog
   servlet:
     multipart:
       max-file-size: 2MB
@@ -37,8 +37,8 @@ qiniu:
   oss:
     accessKey: 284OZEp3RFpzxWbQcVU8gLPjxDLmCKJJzZvci99C
     secretKey: zNFLOlj5Rix1NqE_0WG97UUKP80-Saf4mPAJsr6E
-    bucket: seedless-blog
-  CDN: http://s66bj54ml.bkt.clouddn.com
+    bucket: seed-blog
+  CDN: http://sfvrhb3p9.hn-bkt.clouddn.com
 
 ruoyi:
   captchaType: math

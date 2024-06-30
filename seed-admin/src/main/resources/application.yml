@@ -5,16 +5,15 @@ spring:
   messages:
     # 国际化资源文件路径
     basename: i18n/messages
-
   profiles:
     include: dao
   application:
     name: seed-admin
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/seed_blog?characterEncoding=utf-8&useSSL=FALSE&useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: 772866144
+    url: jdbc:mysql://114.55.31.80:3306/dip_blog?characterEncoding=utf-8&useSSL=FALSE&useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: dip_blog
+    password: dip_blog
   servlet:
     multipart:
       max-file-size: 2MB
