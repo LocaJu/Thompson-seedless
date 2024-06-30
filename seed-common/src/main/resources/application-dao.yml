@@ -37,8 +37,8 @@ qiniu:
   oss:
     accessKey: 284OZEp3RFpzxWbQcVU8gLPjxDLmCKJJzZvci99C
     secretKey: zNFLOlj5Rix1NqE_0WG97UUKP80-Saf4mPAJsr6E
-    bucket: seedless-blog
-  CDN: http://s66bj54ml.bkt.clouddn.com
+    bucket: seed-blog
+  CDN: http://sfvrhb3p9.hn-bkt.clouddn.com
 
 ruoyi:
   captchaType: math

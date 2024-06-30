@@ -12,4 +12,6 @@ public class RedisConstants {
     public static final String ARTICLE_VIEW_COUNT="article:viewCount";
 
     public static final String LOGIN="login:";
+
+    public static final String LOGIN_TOKENS="login_tokens:";
 }

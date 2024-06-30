@@ -30,7 +30,7 @@ public class ArticleController {
     }
 
     @GetMapping("/articleList")
-    public ResponseResult articleList(Integer pageNum, Integer pageSize, Long categoryId) {
+    public ResponseResult articleList(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, @RequestParam("categoryId") Long categoryId) {
         return articleService.articleList(pageNum, pageSize, categoryId);
     }
 
