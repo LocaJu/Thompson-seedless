@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.seed.ruoyi.core.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -20,6 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper=false)
 public class SysDictType extends BaseEntity implements Serializable {
     /**
      * 字典主键

@@ -1,6 +1,8 @@
 package com.seed.ruoyi.exception.file;
 
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
+//import org.apache.tomcat.util.http.fileupload.FileUploadException;
+
+import org.apache.commons.fileupload.FileUploadException;
 
 import java.util.Arrays;
 

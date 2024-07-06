@@ -9,8 +9,9 @@ import com.seed.ruoyi.exception.file.InvalidExtensionException;
 import com.seed.ruoyi.utils.DateUtils;
 import com.seed.ruoyi.utils.StringUtils;
 import com.seed.ruoyi.utils.uuid.Seq;
+import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
+//import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -102,7 +103,7 @@ public class FileUploadUtils
      * @throws InvalidExtensionException 文件校验异常
      */
     public static final String upload(String baseDir, MultipartFile file, String[] allowedExtension)
-            throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
+            throws FileUploadBase.FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
             InvalidExtensionException
     {
         int fileNamelength = Objects.requireNonNull(file.getOriginalFilename()).length();
@@ -159,12 +160,12 @@ public class FileUploadUtils
      * @throws InvalidExtensionException
      */
     public static final void assertAllowed(MultipartFile file, String[] allowedExtension)
-            throws FileSizeLimitExceededException, InvalidExtensionException
+            throws FileUploadBase.FileSizeLimitExceededException, InvalidExtensionException
     {
         long size = file.getSize();
         if (size > DEFAULT_MAX_SIZE)
         {
-            throw new FileSizeLimitExceededException(String.valueOf(DEFAULT_MAX_SIZE / 1024 / 1024),size,DEFAULT_MAX_SIZE / 1024 / 1024);
+            throw new FileUploadBase.FileSizeLimitExceededException(String.valueOf(DEFAULT_MAX_SIZE / 1024 / 1024),size,DEFAULT_MAX_SIZE / 1024 / 1024);
         }
 
         String fileName = file.getOriginalFilename();

@@ -2,6 +2,7 @@ package com.seed.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.seed.enums.AppHttpCodeEnum;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * @date 2023/12/10 17:30
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@EqualsAndHashCode(callSuper = false)
 public class ResponseResult<T> implements Serializable {
     private Integer code;
     private String msg;

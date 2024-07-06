@@ -14,7 +14,7 @@ spring:
       max-request-size: 5MB
   data:
     redis:
-      database: 1
+      database: 2
       host: 114.55.31.80
       port: 6379
       password: qq772866144

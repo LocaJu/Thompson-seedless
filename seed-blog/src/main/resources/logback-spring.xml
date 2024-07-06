@@ -28,6 +28,7 @@
 		</rollingPolicy>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<pattern>${log.pattern.file}</pattern>
+			<charset>UTF-8</charset>
 		</encoder>
 	</appender>
 
