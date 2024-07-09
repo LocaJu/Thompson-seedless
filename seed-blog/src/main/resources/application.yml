@@ -10,7 +10,7 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-server:
-  port: 7777
+#server:
+#  port: 7777
 
 

@@ -7,7 +7,6 @@ import com.seed.enums.AppHttpCodeEnum;
 import com.seed.ruoyi.constant.Constants;
 import com.seed.service.system.web.service.TokenService;
 import com.seed.utils.RedisCache;
-import com.seed.utils.RedisConstants;
 import com.seed.utils.WebUtils;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -25,6 +24,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Objects;
+
 
 
 /**
@@ -68,7 +68,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
 //        String userId = claims.getSubject();
         //从redis中获取用户信息
-        LoginUser loginUser = redisCache.getCacheObject(RedisConstants.LOGIN_TOKENS + uuid);
+        LoginUser loginUser = redisCache.getCacheObject("login_tokens:" + uuid);
         //如果redis中获取不到
         if (Objects.isNull(loginUser)){
             //说明登录过期

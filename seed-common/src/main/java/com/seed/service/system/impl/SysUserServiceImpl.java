@@ -87,6 +87,7 @@ public class SysUserServiceImpl implements ISysUserService {
 //        User user = getById(userId);
         //封装UserInfoVo返回
         UserInfoVo userInfoVo = BeanCopyUtils.copyBean(sysUser, UserInfoVo.class);
+        userInfoVo.setId(sysUser.getUserId());
         //将用户中的路径加上域名
         /**
          *                                 /2023/12/30/2/2eacc66309ade14644a6b9b4f9bbf0ee/2eacc66309ade14644a6b9b4f9bbf0ee.csv
@@ -106,6 +107,7 @@ public class SysUserServiceImpl implements ISysUserService {
         String filepath = avatarUrl.replace(CDN, "");
 
         SysUser sysUser = BeanCopyUtils.copyBean(userInfoDTO, SysUser.class);
+        sysUser.setUserId(userInfoDTO.getId());
         sysUser.setAvatar(filepath);
         userMapper.updateUser(sysUser);
 //        updateById(user);

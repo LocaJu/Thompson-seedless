@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seed.constants.SystemConstants;
 import com.seed.domain.ResponseResult;
 import com.seed.domain.entity.Comment;
+import com.seed.domain.entity.system.SysUser;
 import com.seed.domain.vo.CommentVo;
 import com.seed.domain.vo.PageVo;
 import com.seed.enums.AppHttpCodeEnum;
@@ -111,14 +112,19 @@ implements CommentService{
         //遍历Vo集合
         for (CommentVo commentVo : commentVos) {
             //通过creatBy查询用户的昵称并赋值
-            String nickName = userService.selectUserById(commentVo.getCreateBy()).getNickName();
-            commentVo.setUsername(nickName);
-
+            SysUser user = userService.selectUserById(commentVo.getCreateBy());
+            if (user != null) {
+                String nickName = user.getNickName();
+                commentVo.setUsername(nickName);
+            }
             //通过toCommentUserId查询用户的昵称并赋值
             //如果toCommentUserId不为-1才进行查询
-            if (commentVo.getToCommentUserId()!=-1){
-                String toCommentUserName = userService.selectUserById(commentVo.getToCommentUserId()).getNickName();
-                commentVo.setToCommentUserName(toCommentUserName);
+            if (commentVo.getToCommentUserId() != -1) {
+                SysUser user1 = userService.selectUserById(commentVo.getToCommentUserId());
+                if (user1 != null) {
+                    String toCommentUserName = user1.getNickName();
+                    commentVo.setToCommentUserName(toCommentUserName);
+                }
             }
         }
 

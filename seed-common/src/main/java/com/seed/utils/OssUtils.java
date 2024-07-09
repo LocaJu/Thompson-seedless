@@ -37,7 +37,7 @@ public class OssUtils {
     public  void UploadFile(MultipartFile imgFile,String tempAbsolutePath, String filePathName) throws IOException {
 
         //构造一个带指定Region对象的配置类
-        Configuration cfg = new Configuration(Region.huadongZheJiang2());
+        Configuration cfg = new Configuration(Region.huanan());
         UploadManager uploadManager = new UploadManager(cfg);
         //...生成上传凭证，然后准备上传
         Auth auth = Auth.create(accessKey, secretKey);

@@ -11,7 +11,7 @@ import com.seed.ruoyi.utils.StringUtils;
 import com.seed.ruoyi.utils.uuid.Seq;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.io.FilenameUtils;
-//import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
+import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -103,9 +103,8 @@ public class FileUploadUtils
      * @throws InvalidExtensionException 文件校验异常
      */
     public static final String upload(String baseDir, MultipartFile file, String[] allowedExtension)
-            throws FileUploadBase.FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
-            InvalidExtensionException
-    {
+            throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
+            InvalidExtensionException, FileUploadBase.FileSizeLimitExceededException {
         int fileNamelength = Objects.requireNonNull(file.getOriginalFilename()).length();
         if (fileNamelength > FileUploadUtils.DEFAULT_FILE_NAME_LENGTH)
         {
