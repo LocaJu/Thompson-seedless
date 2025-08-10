@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>图片查看页面</title>
+    <style>
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .image-container img {
+            max-width: 500px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+<h1>图片查看</h1>
+<p>类型: <span th:text="${type}"></span></p>
+<p>KeyValue: <span th:text="${keyvalue}"></span></p>
+
+<div class="image-container">
+    <!-- 遍历图片列表 -->
+    <div th:each="imageUrl : ${imageUrls}">
+        <img th:src="${imageUrl}" alt="图片" />
+    </div>
+</div>
+</body>
+</html>
