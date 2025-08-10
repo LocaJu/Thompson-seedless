@@ -95,7 +95,8 @@ public class SecurityConfig {
                                 .requestMatchers(
                                         "/login",
                                         "/register",
-                                        "/captchaImage").permitAll()
+                                        "/captchaImage",
+                                        "/PhotoView").permitAll()
                                 .requestMatchers(HttpMethod.GET,
                                         "/",
                                         "/*.html",
