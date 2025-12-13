@@ -33,7 +33,7 @@ public class CommentController {
             @ApiImplicitParam(name = "pageSize", value = "每页显示数量", required = true, paramType = "query"),
             @ApiImplicitParam(name = "articleId", value = "文章ID", required = true, paramType = "query")
     })
-    public ResponseResult commentList(Long articleId,Integer pageNum,Integer pageSize){
+    public ResponseResult commentList(@RequestParam("articleId") Long articleId, @RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize){
         return commentService.commentList(SystemConstants.ARTICLE_COMMENT,articleId,pageNum,pageSize);
     }
 
@@ -46,7 +46,7 @@ public class CommentController {
 
     @GetMapping("/linkCommentList")
     @ApiOperation(value = "获取友链评论列表",notes = "获取友链评论列表")
-    public ResponseResult linkCommentList(Integer pageNum,Integer pageSize){
+    public ResponseResult linkCommentList(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize){
         return commentService.commentList(SystemConstants.LINK_COMMENT,null,pageNum,pageSize);
     }
 }
