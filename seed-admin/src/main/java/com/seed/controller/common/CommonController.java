@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -75,7 +76,7 @@ public class CommonController
      * 通用上传请求（单个）
      */
     @PostMapping("/upload")
-    public AjaxResult uploadFile(MultipartFile file) throws Exception
+    public AjaxResult uploadFile(@RequestParam("file") MultipartFile file) throws Exception
     {
         try
         {
@@ -101,7 +102,7 @@ public class CommonController
      * 通用上传请求（多个）
      */
     @PostMapping("/uploads")
-    public AjaxResult uploadFiles(List<MultipartFile> files) throws Exception
+    public AjaxResult uploadFiles(@RequestParam("files") List<MultipartFile> files) throws Exception
     {
         try
         {

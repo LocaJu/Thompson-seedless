@@ -124,7 +124,13 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         Article article = getById(id);
         //从redis中获取浏览量
         Integer viewCount = redisCache.getCacheMapValue(RedisConstants.ARTICLE_VIEW_COUNT, String.valueOf(id));
-        article.setViewCount(viewCount.longValue());
+        // 处理viewCount为null的情况
+        if (viewCount != null) {
+            article.setViewCount(viewCount.longValue());
+        } else {
+            // 如果Redis中没有，使用数据库中的值，如果也为null则默认为0
+            article.setViewCount(article.getViewCount() != null ? article.getViewCount() : 0L);
+        }
         //转换为VO
         ArticleDetailVo articleDetailVo = BeanCopyUtils.copyBean(article, ArticleDetailVo.class);
         //根据分类id查询分类名
@@ -159,8 +165,17 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             */
             //将文章中的路径域名去掉（数据库中存储文件相对路径）
             String thumbnailUrl = article.getThumbnail();
-            String filepath = thumbnailUrl.replace(CDN, "");
-            article.setThumbnail(filepath);
+            if (thumbnailUrl != null && !thumbnailUrl.trim().isEmpty()) {
+                // 如果包含CDN域名，则去掉域名，只保留相对路径
+                if (thumbnailUrl.contains(CDN)) {
+                    String filepath = thumbnailUrl.replace(CDN, "");
+                    article.setThumbnail(filepath);
+                }
+                // 如果不包含CDN域名，说明已经是相对路径，直接使用
+            } else {
+                // 如果缩略图为空，设置为null
+                article.setThumbnail(null);
+            }
 
             //保存文章
             save(article);
@@ -178,7 +193,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
         //条件查询
         queryWrapper.like(Objects.nonNull(article.getSummary()), Article::getSummary, "%"+article.getSummary()+"%")
-                .like(Objects.nonNull(article.getTitle()), Article::getTitle, "%"+article.getTitle()+"%");
+                .like(Objects.nonNull(article.getTitle()), Article::getTitle, "%"+article.getTitle()+"%")
+                .eq(Objects.nonNull(article.getCategoryId()), Article::getCategoryId, article.getCategoryId())
+                .eq(Objects.nonNull(article.getStatus()), Article::getStatus, article.getStatus());
 
         Page<Article> page=new Page<>(pageNum==null?1:pageNum,pageSize==null?10:pageSize);
         page(page, queryWrapper);
@@ -190,9 +207,34 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
          *                                 /2023/12/30/2/2eacc66309ade14644a6b9b4f9bbf0ee/2eacc66309ade14644a6b9b4f9bbf0ee.csv
          * http://s66bj54ml.bkt.clouddn.com/2023/12/30/2/2eacc66309ade14644a6b9b4f9bbf0ee/2eacc66309ade14644a6b9b4f9bbf0ee.csv
          **/
-        List<Article> articleList = articles.stream().map(s -> s.setThumbnail(CDN + s.getThumbnail())).collect(Collectors.toList());
+        List<Article> articleList = articles.stream().map(s -> {
+            // 处理缩略图URL，如果为null或空，则保持null
+            if (s.getThumbnail() != null && !s.getThumbnail().trim().isEmpty()) {
+                // 如果已经是完整URL（包含CDN），则直接使用；否则拼接CDN
+                if (s.getThumbnail().startsWith("http://") || s.getThumbnail().startsWith("https://")) {
+                    return s;
+                } else {
+                    s.setThumbnail(CDN + s.getThumbnail());
+                }
+            }
+            return s;
+        }).collect(Collectors.toList());
         //转换为VO
         List<ArticleListVo> articleListVos = BeanCopyUtils.copyBeanList(articleList, ArticleListVo.class);
+        //设置分类名称
+        articleListVos.stream().forEach(vo -> {
+            // 从原始Article对象中获取categoryId
+            Article article_inner = articleList.stream()
+                    .filter(a -> a.getId().equals(vo.getId()))
+                    .findFirst()
+                    .orElse(null);
+            if (article_inner != null && article_inner.getCategoryId() != null) {
+                Category category = categoryService.getById(article_inner.getCategoryId());
+                if (category != null) {
+                    vo.setCategoryName(category.getName());
+                }
+            }
+        });
         //封装查询结果
         PageVo pageVo = new PageVo(articleListVos, page.getTotal());
         return ResponseResult.okResult(pageVo);
@@ -205,7 +247,35 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
      */
     @Override
     public ResponseResult updateArticle(ArticleDto articleDto) {
+        // 先查询原文章，保留viewCount等系统管理的字段
+        Article existingArticle = null;
+        if (articleDto.getId() != null) {
+            existingArticle = getById(articleDto.getId());
+        }
+        
         Article article = BeanCopyUtils.copyBean(articleDto, Article.class);
+        
+        // 保留原有的viewCount（访问量由系统自动管理，不应被前端修改）
+        if (existingArticle != null && existingArticle.getViewCount() != null) {
+            article.setViewCount(existingArticle.getViewCount());
+        } else if (article.getViewCount() == null) {
+            article.setViewCount(0L);
+        }
+        
+        // 处理缩略图URL，去掉CDN域名（数据库中存储相对路径）
+        String thumbnailUrl = article.getThumbnail();
+        if (thumbnailUrl != null && !thumbnailUrl.trim().isEmpty()) {
+            // 如果包含CDN域名，则去掉域名，只保留相对路径
+            if (thumbnailUrl.contains(CDN)) {
+                String filepath = thumbnailUrl.replace(CDN, "");
+                article.setThumbnail(filepath);
+            }
+            // 如果不包含CDN域名，说明已经是相对路径，直接使用
+        } else {
+            // 如果缩略图为空，设置为null
+            article.setThumbnail(null);
+        }
+        
         baseMapper.updateById(article);
 
         return ResponseResult.okResult();

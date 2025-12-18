@@ -102,7 +102,7 @@ public class SecurityConfig {
                                         "/*/*.html",
                                         "/*/*.css",
                                         "/*/*.js",
-                                        "/profile/*").permitAll()
+                                        "/profile/**").permitAll()
                                 //状态监控websocket
                                 .requestMatchers("/websocket/**").permitAll()
                                 ////若要给应用程序发送请求，则发送请求的用户必须先通过认证

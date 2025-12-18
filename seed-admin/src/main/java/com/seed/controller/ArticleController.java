@@ -29,7 +29,12 @@ public class ArticleController {
     }
 
     @PostMapping("/list")
-    public ResponseResult list(Integer pageNum, Integer pageSize,ArticleDto article){
+    public ResponseResult list(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum, 
+                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                               @RequestBody(required = false) ArticleDto article){
+        if (article == null) {
+            article = new ArticleDto();
+        }
         return articleService.getAllList(pageNum, pageSize, article);
     }
 
