@@ -11,7 +11,7 @@ spring:
     name: seed-admin
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://114.55.31.80:3306/dip_blog?characterEncoding=utf-8&useSSL=FALSE&useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://8.152.215.45:3306/dip_blog?characterEncoding=utf-8&useSSL=FALSE&useUnicode=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: dip_blog
     password: dip_blog
   servlet:
