@@ -44,14 +44,14 @@
         INSERT INTO sys_moitor ( sys_total_memory,sys_free_memory,cpu_core
         ,jvm_heap_memory_max,jvm_heap_memory_used,sys_cpu_used
         ,jvm_cpu_used,disk_total_size,disk_free_size
-        ,database,redis,create_time
+        ,`database`,redis,create_time
         )
         VALUES
         <foreach collection="sysMoitorSet" item="item" separator=",">
-            (#{sysTotalMemory,jdbcType=BIGINT},#{sysFreeMemory,jdbcType=BIGINT},#{cpuCore,jdbcType=BIGINT}
-            ,#{jvmHeapMemoryMax,jdbcType=BIGINT},#{jvmHeapMemoryUsed,jdbcType=BIGINT},#{sysCpuUsed,jdbcType=DECIMAL}
-            ,#{jvmCpuUsed,jdbcType=DECIMAL},#{diskTotalSize,jdbcType=BIGINT},#{diskFreeSize,jdbcType=BIGINT}
-            ,#{database,jdbcType=VARCHAR},#{redis,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP}
+            (#{item.sysTotalMemory,jdbcType=BIGINT},#{item.sysFreeMemory,jdbcType=BIGINT},#{item.cpuCore,jdbcType=BIGINT}
+            ,#{item.jvmHeapMemoryMax,jdbcType=BIGINT},#{item.jvmHeapMemoryUsed,jdbcType=BIGINT},#{item.sysCpuUsed,jdbcType=DECIMAL}
+            ,#{item.jvmCpuUsed,jdbcType=DECIMAL},#{item.diskTotalSize,jdbcType=BIGINT},#{item.diskFreeSize,jdbcType=BIGINT}
+            ,#{item.database,jdbcType=VARCHAR},#{item.redis,jdbcType=VARCHAR},#{item.createTime,jdbcType=TIMESTAMP}
             )
         </foreach>
 
