@@ -69,3 +69,11 @@ management:
     web:
       exposure:
         include: health,info,metrics
+
+# DeepSeek AI 配置（建议使用环境变量覆盖密钥：DEEPSEEK_API_KEY）
+deepseek:
+  base-url: https://api.deepseek.com
+  api-key: sk-8a9f60cef6344a7c954129211de47dc6
+  model: ${DEEPSEEK_MODEL:deepseek-chat}
+  timeout-ms: ${DEEPSEEK_TIMEOUT_MS:15000}
+  temperature: ${DEEPSEEK_TEMPERATURE:0.7}
