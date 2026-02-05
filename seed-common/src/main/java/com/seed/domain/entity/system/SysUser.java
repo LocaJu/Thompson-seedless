@@ -35,6 +35,10 @@ public class SysUser extends BaseEntity
 
     /** 用户账号 */
     @Excel(name = "登录名称")
+    private String loginName;
+
+    /** 用户账号 */
+    @Excel(name = "用户名称")
     private String userName;
 
     /** 用户昵称 */
@@ -151,6 +155,14 @@ public class SysUser extends BaseEntity
     public String getUserName()
     {
         return userName;
+    }
+
+    public String getLoginName()
+    {
+        return userName;
+    }
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
     }
 
     public void setUserName(String userName)

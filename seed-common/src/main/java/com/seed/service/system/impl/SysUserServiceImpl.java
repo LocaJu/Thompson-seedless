@@ -116,16 +116,16 @@ public class SysUserServiceImpl implements ISysUserService {
     public ResponseResult register(UserRegiterDTO userRegiterDTO) {
 
         //对数据进行非空判断
-        if (!org.springframework.util.StringUtils.hasText(userRegiterDTO.getUserName())) {
+        if (!StringUtils.hasText(userRegiterDTO.getUserName())) {
             throw new SystemException(AppHttpCodeEnum.REQUIRE_USERNAME);
         }
-        if (!org.springframework.util.StringUtils.hasText(userRegiterDTO.getPassword())) {
+        if (!StringUtils.hasText(userRegiterDTO.getPassword())) {
             throw new SystemException(AppHttpCodeEnum.PASSWORD_NOT_NULL);
         }
-        if (!org.springframework.util.StringUtils.hasText(userRegiterDTO.getNickName())) {
+        if (!StringUtils.hasText(userRegiterDTO.getNickName())) {
             throw new SystemException(AppHttpCodeEnum.NICKNAME_NOT_NULL);
         }
-        if (!org.springframework.util.StringUtils.hasText(userRegiterDTO.getEmail())) {
+        if (!StringUtils.hasText(userRegiterDTO.getEmail())) {
             throw new SystemException(AppHttpCodeEnum.EMAIL_NOT_NULL);
         }
 
@@ -142,8 +142,14 @@ public class SysUserServiceImpl implements ISysUserService {
         userRegiterDTO.setPassword(encodePassword);
 
         //类型转换并存入数据库
-        SysUser sysuser = BeanCopyUtils.copyBean(userRegiterDTO, SysUser.class);
-        userMapper.insertUser(sysuser);
+        SysUser sysUser= new SysUser();
+        sysUser.setUserName(userRegiterDTO.getUserName());
+        sysUser.setLoginName(userRegiterDTO.getUserName());
+        sysUser.setNickName(userRegiterDTO.getNickName());
+        sysUser.setEmail(userRegiterDTO.getEmail());
+        sysUser.setPassword(userRegiterDTO.getPassword());
+//        SysUser sysuser = BeanCopyUtils.copyBean(userRegiterDTO, SysUser.class);
+        userMapper.insertUser(sysUser);
 //        save(user);
         return ResponseResult.okResult();
     }
